@@ -28,5 +28,5 @@ $app->listen();
         
 *Fell free to change everything you need and make a commit if you improve something.
 
-[Follow me @juliomatcom](https://twitter.com/juliomatcom,    "Follow me and get in touch")  
+[Follow me @juliomatcom](https://twitter.com/juliomatcom    "Follow me and get in touch")
 [Visit http://oneframework.julces.com/](http://oneframework.julces.com/    "Official website")

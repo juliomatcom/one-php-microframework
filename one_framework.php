@@ -30,13 +30,15 @@ class OneFramework{
 
     public function listen(){
         $slugs = array();
+        $run = 0;
         foreach($this->routes as $route)
             if($func = $this->processUri($route,$slugs)){
                 //call callback function with params in slugs
+                $run = 1;
                 call_user_func_array($func,$slugs);
             }
 
-        $this->error('Not route found');
+        if(!$run) $this->error('Not route found');
     }
 
     /**
@@ -245,6 +247,4 @@ class OneFramework{
         ;
         throw new Exception();
     }
-
-
 }
