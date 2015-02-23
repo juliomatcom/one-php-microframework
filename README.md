@@ -4,6 +4,7 @@
 ####1- Route system (And generator for views)
 ####2- Translations (Available in controller and views)
 ####3- Response (load views)
+####4- Inspired in Symfony and ExpressJS
 #####Installation:
 1- Include the one_framework.php in your project and  the .htaccess file in the root folder.    
 2- Initialize the class, add some routes-action with get. (See the example bellow).    
@@ -17,7 +18,7 @@ $app = new OneFramework();
 
 $app->get('/',function() use ($app){//anonymous function    
     echo 'Hello world';     
-    // return $app->Response('index.php',$data)     
+    // return $app->Response('view.php',$data)
 });     
 $app->listen();
 ```
@@ -26,9 +27,19 @@ $app->listen();
 ####MVC style could look like this:
 ![MVC folders](http://i60.tinypic.com/ne6hhl.png "MVC folders")
 
+
+
+```php
+// controllers/main.php    
+//Dinamic route with 1 variable in the URL 
+$app->get('/book/{id_book}/edit',function($id_book) use ($app){ 
+     return $app->Response('view.php',array('app'=> $app,'book' => $id_book));
+});   
+
+$app->listen();
+```
+
 ######If you want to see the  /index.php/ in all URLS change the defined constant: <i> APP_NAME</i> in the Framework class and delete the .htaccess from the project.   
-
-
 *Fell free to change everything you need and make a commit if you improve something.
 
 [Follow me @juliomatcom](https://twitter.com/juliomatcom    "Follow me and get in touch")  

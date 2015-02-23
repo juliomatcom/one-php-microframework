@@ -16,7 +16,7 @@ class OneFramework{
     protected $db;
     protected $routes = array();
     //set this value to True if you want to get access to translations
-    protected $translate = false;
+    protected $translate = true;
     //here the value of the locale requested by url (segment 1)
     protected $locale = null;
     protected $locales = ['es','en','fr'];
@@ -201,14 +201,32 @@ class OneFramework{
         exit;
     }
 
+
     /**
-     * Return new Response
-     * @param $view_filename source to the view file
-     * @param array $vars for the View
+     * Return a new HTTP response.
+     * @param string $view_filename Source to the file
+     * @param array $vars Data to pass to the View
+     * @param array $headers Http Headers
      */
-    public function Response($view_filename,$vars = array()){
+    public function Response($view_filename,array $vars = array(),array $headers=array()){
+        if(count($headers)){//add extra headers
+            foreach($headers as $key=>$header){
+                header($key.': '.$header);
+            }
+        }
+
         $data = $vars;
         include_once(VIEWS_ROUTE."$view_filename");
+        exit;
+    }
+
+    /**
+     * Return a new Json Object Response
+     * @param array $data Array to encode
+     */
+    public function JsonResponse(array $data = array()){
+        header('Content-Type: application/json');//set headers
+        echo json_encode($data);
         exit;
     }
 
