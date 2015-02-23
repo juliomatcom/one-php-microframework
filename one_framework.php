@@ -1,8 +1,8 @@
 <?php
 /**
- * One Framefork
+ * One PHP MVC Micro Framework
  * @author Julio Cesar Martin
- * @juliomatcom - juliomatcom@gmail.com
+ * Twitter @juliomatcom - Email juliomatcom@gmail.com
  * Feel free to contact me any time
  * http://oneframework.julces.com/
  *
@@ -21,8 +21,10 @@ class OneFramework{
     protected $locale = null;
     protected $locales = ['es','en','fr'];
     protected $translations = array();
+    protected $prod = false;
 
-    public function __construct(){
+    public function __construct($prod = false){
+        $this->prod = $prod;
         $this->defineConstants();
         $this->buildRequest();
         $this->loadTrans();
@@ -128,6 +130,14 @@ class OneFramework{
      */
     public function getLocale(){
         return $this->locale ? $this->locale : false;
+    }
+
+    /**
+     * Get current enviroment
+     * @return bool
+     */
+    public function getEnviroment(){
+        return $this->prod;
     }
 
     /**
@@ -239,12 +249,18 @@ class OneFramework{
      * @throws Exception
      */
     private function error($msg=''){
-        echo
-        "<h1>Error</h1>
-         <p>$msg</p>
-         <br/>
-         <h2>Trace:</h2>"
-        ;
-        throw new Exception();
+        if($this->prod){
+            //do something here
+            return false;
+        }
+        else{
+            echo
+            "<h1>One Framework: Error</h1>
+             <p>$msg</p>
+             <br/>
+             <h2>Trace:</h2>"
+            ;
+            throw new Exception();
+        }
     }
 }
