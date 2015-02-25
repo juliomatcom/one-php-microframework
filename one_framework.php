@@ -40,7 +40,7 @@ class OneFramework{
                 call_user_func_array($func,$slugs);
             }
 
-        if(!$run) $this->error('Not route found');
+        if(!$run) $this->error('Not route found',1);
     }
 
     /**
@@ -160,7 +160,9 @@ class OneFramework{
             if(!$lang) $lang= $this->locale;
             return isset($this->translations[$lang][$key]) ? $this->translations[$lang][$key] : 'translation_'.$key;
         }
-        else return $this->error('Translation disabled');
+        else return $this->error(
+            'You can not use translation because is disabled in the Framework.<br/>
+             Set the value of \'translate\' property to true.');
     }
 
     /**
@@ -214,8 +216,9 @@ class OneFramework{
                 header($key.': '.$header);
             }
         }
-
+        //pass to the view
         $data = $vars;
+        $app = $this;
         include_once(VIEWS_ROUTE."$view_filename");
         exit;
     }
@@ -260,24 +263,30 @@ class OneFramework{
         return isset($uri_segments[$segment_number]) ? $uri_segments[$segment_number] : false;
     }
 
-
     /**
-     * Show frameworks error
+     * Show framework's errors
      * @param string $msg
-     * @throws Exception
+     * @param int $number
      */
-    private function error($msg=''){
+    private function error($msg='',$number = 0){
         if($this->prod){
             //do something here
             return false;
         }
         else{
-            echo
-            "<h1>One Framework: Error</h1>
-             <p>$msg</p>
-             <br/>
-             <h2>Trace:</h2>"
-            ;
+            $frw_msg =
+                "<h1>One Framework: Error</h1>
+             <p>$msg</p><br/>";
+
+            switch($number){
+                case 1:
+                    $frw_msg = $frw_msg."<b>Note</b>: If your url add a /{lang}/ path is because is enabled the framework's translations.";
+                    break;
+                default: break;
+            }
+
+            $frw_msg = $frw_msg." <h2>Trace:</h2>";
+            echo $frw_msg;
             throw new Exception();
         }
     }
