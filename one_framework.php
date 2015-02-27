@@ -16,7 +16,7 @@ class OneFramework{
     protected $db;
     protected $routes = array();
     //set this value to True if you want to get access to translations
-    protected $translate = true;
+    protected $translate = false;
     //here the value of the locale requested by url (segment 1)
     protected $locale = null;
     protected $locales = ['es','en','fr'];
