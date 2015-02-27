@@ -3,7 +3,7 @@ Only 1 file (easy readable, less 10kb). Not MVC required. Ready to go.
 Perfect fit in small projects and web services, only use what you need as you want.
 ###Freatures:
 ####1- Route system (And generator for views)
-####2- Translations (Available in controller and views)
+####2- Translations by URL automatic (Available in controller and views)
 ####3- Response (load views)
 ####4- Inspired in Symfony and ExpressJS    
 #####Installation:

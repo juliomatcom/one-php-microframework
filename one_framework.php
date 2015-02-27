@@ -16,7 +16,7 @@ class OneFramework{
     protected $db;
     protected $routes = array();
     //set this value to True if you want to get access to translations
-    protected $translate = false;
+    protected $translate = true;
     //here the value of the locale requested by url (segment 1)
     protected $locale = null;
     protected $locales = ['es','en','fr'];
@@ -217,9 +217,8 @@ class OneFramework{
             }
         }
         //pass to the view
-        $data = $vars;
-        $app = $this;
-        include_once(VIEWS_ROUTE."$view_filename");
+        $view = new View(VIEWS_ROUTE.$view_filename,$vars,$this);
+        $view->load();
         exit;
     }
 
@@ -280,7 +279,7 @@ class OneFramework{
 
             switch($number){
                 case 1:
-                    $frw_msg = $frw_msg."<b>Note</b>: If your url add a /{lang}/ path is because is enabled the framework's translations.";
+                    $frw_msg = $frw_msg."<b>Note</b>: Routes begin always with '/' character. If app add a /{lang}/ path is because is enabled the framework's translations.";
                     break;
                 default: break;
             }
@@ -288,6 +287,38 @@ class OneFramework{
             $frw_msg = $frw_msg." <h2>Trace:</h2>";
             echo $frw_msg;
             throw new Exception();
+        }
+    }
+}
+
+/**
+ * Class View
+ * Load a view File with access to data and Framework
+ */
+class View
+{
+    protected $data;
+    protected $framework;
+    protected $src;
+
+    public function __construct($src,array $vars,$framework = null){
+        $this->data = $vars;
+        $this->framework = $framework;
+        $this->src = $src;
+    }
+
+    /**
+     * Renders a view
+     * @throws Exception if View not found
+     */
+    public  function load(){
+        $app = $this->framework;
+        $data = $this->data;
+        if(file_exists($this->src))
+            include_once($this->src); //scoped to this class
+        else{
+            if($this->framework && !$this->framework->getEnviroment())
+                throw new Exception("ONE Framework: View filename: {$this->src} NOT found in ". VIEWS_ROUTE);
         }
     }
 }
