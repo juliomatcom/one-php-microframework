@@ -134,7 +134,7 @@ class OneFramework{
 
     /**
      * Get current enviroment
-     * @return bool
+     * @return bool True if Production is ON
      */
     public function getEnviroment(){
         return $this->prod;
