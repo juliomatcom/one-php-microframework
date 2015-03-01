@@ -1,15 +1,22 @@
 ##ONE <i> PHP Minimalist MVC Framework.</i>
 Only 1 file (Easy readable, adaptable). Not MVC required. Ready to go.
 Perfect fit in small projects and web services, only use what you need as you want.
-###Features:
-####1- Route system (And generator for views)
-####2- Native localizations by URL (Available in controller and views)
-####3- Response (+load Views)
-####4- Inspired in Symfony and ExpressJS    
-#####How to Use:
-1- Include the one_framework.php in your project and  add the .htaccess file in the root folder.     
-2- Initialize the class, add some routes-action with get. (See the example bellow).    
-3- Run listen.
+####Features:
+#####1- Route system (And generator for views)
+#####2- Native localizations by URL (Available in controller and views)
+#####3- Response (+load Views)
+#####4- Inspired in Symfony and ExpressJS       
+
+###Add to your project:
+1-Install with composer or download zip:         
+ 
+      
+``` 
+composer create-project julces/oneframework
+``` 
+2- Include the one_framework.php in your project and  add the .htaccess file in the root folder.     
+3- Initialize the class, add some routes-action with get. (See the example bellow).    
+4- Run listen.
   
 ```php
 //index.php file    
