@@ -1,13 +1,13 @@
-##One  <i>Micro PHP MVC Framework.</i>
+##ONE <i> PHP Minimalist MVC Framework.</i>
 Only 1 file (Easy readable, adaptable). Not MVC required. Ready to go.
 Perfect fit in small projects and web services, only use what you need as you want.
 ###Features:
 ####1- Route system (And generator for views)
-####2- Translations by URL automatic (Available in controller and views)
-####3- Response (load views)
+####2- Native localizations by URL (Available in controller and views)
+####3- Response (+load Views)
 ####4- Inspired in Symfony and ExpressJS    
-#####Installation:
-1- Include the one_framework.php in your project and  add the .htaccess file in the root folder.
+#####How to Use:
+1- Include the one_framework.php in your project and  add the .htaccess file in the root folder.     
 2- Initialize the class, add some routes-action with get. (See the example bellow).    
 3- Run listen.
   

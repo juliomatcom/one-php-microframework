@@ -19,8 +19,10 @@ class OneFramework{
     protected $translate = false;
     //here the value of the locale requested by url (segment 1)
     protected $locale = null;
+    //values for match and generate in the URLs if $translate is TRUE
     protected $locales = ['es','en','fr'];
     protected $translations = array();
+    //enviroment: if prod = false => no errors show
     protected $prod = false;
 
     public function __construct($prod = false){

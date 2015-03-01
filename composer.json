@@ -1,0 +1,22 @@
+{
+    "name": "julces/oneframework",
+    "type": "library",
+    "description": "One - PHP Minimalist MVC Framework",
+    "keywords": ["One","Micro","Minimalist","Framework","PHP"],
+    "homepage": "https://github.com/juliomatcom/one-file-php-framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Julio Cesar Martin",
+            "email": "julio@yandex.com",
+            "homepage": "http://oneframework.julces.com/"
+        },
+        {
+            "name": "One Framework Community",
+            "homepage": "https://github.com/juliomatcom/one-file-php-framework/graphs/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
