@@ -10,10 +10,8 @@ Perfect fit in small projects and web services, only use what you need as you wa
 #####5- Zero config
 
 ###Add to your project:
-1-Install with Composer or download zip:         
- 
-      
-``` 
+1-Install with Composer or download zip:        
+```     
 composer create-project julces/oneframework
 ``` 
 2- Include the one_framework.php in your project and  add the .htaccess file in the root folder.     
@@ -23,7 +21,6 @@ composer create-project julces/oneframework
 ```php
 //index.php file    
 require_once('one_framework.php');  
-//load Framework    
 $app = new OneFramework();      
 
 $app->get('/',function() use ($app){//Action
@@ -32,10 +29,8 @@ $app->get('/',function() use ($app){//Action
 $app->listen();
 ```
 
-
 ####MVC style could look like this:
 ![MVC folders](http://i60.tinypic.com/ne6hhl.png "MVC folders")
-
 
 
 ```php
@@ -44,15 +39,22 @@ $app->listen();
 $app->get('/book/{id_book}/edit',function($id_book) use ($app){ 
 $book = getBook($id_book);
      return $app->Response('view_path.php',array('book' => $book));
-});   
-
+});     
 ```
-
+####Match a Route if and only is a POST request 
+```php
+//Action that only run with a POST request
+$app->post('/book/{id_book}/update',function() use ($app){
+    //save...
+});
+```
 ####View and translation
 ```php
 // /views/home.php
 // $app is pass as global variable to every View file
- <p><?php echo $app->trans('home_tittle'); ?></p>
+ <p>
+    <?php echo $app->trans('home_tittle'); ?>
+ </p>
 ```
 The framework $app is globally accesible from any view loaded by Response().
 #### Translation file look like this
