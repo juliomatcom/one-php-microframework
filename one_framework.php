@@ -2,7 +2,7 @@
 /**
  * One PHP MVC Micro Framework
  * @author Julio Cesar Martin
- * Twitter @juliomatcom - Email juliomatcom@gmail.com
+ * Twitter @juliomatcom - Email juliomatcom@yandex.com
  * Feel free to contact me any time
  * http://oneframework.julces.com/
  *
@@ -19,12 +19,14 @@ class OneFramework{
     protected $translate = false;
     //here the value of the locale requested by url (segment 1)
     protected $locale = null;
-    //values for match and generate in the URLs if $translate is TRUE
     protected $locales = ['es','en','fr'];
     protected $translations = array();
-    //enviroment: if prod = false => no errors show
     protected $prod = false;
 
+    /**
+     * Initialize Framework Core
+     * @param bool $prod Enviroment, set to false for Enable Debugging
+     */
     public function __construct($prod = false){
         $this->prod = $prod;
         $this->defineConstants();
@@ -32,17 +34,16 @@ class OneFramework{
         $this->loadTrans();
     }
 
+    /**
+     * Start listen for requests
+     */
     public function listen(){
         $slugs = array();
-        $run = 0;
-        foreach($this->routes as $route)
-            if($func = $this->processUri($route,$slugs)){
-                //call callback function with params in slugs
-                $run = 1;
-                call_user_func_array($func,$slugs);
-            }
 
-        if(!$run) $this->error('Not route found',1);
+        $run = ($this->request->type != 'GET') ? $this->traverseRoutes($this->request->type,$slugs) : false;
+        $run = $run ? $run : $this->traverseRoutes('GET',$slugs);
+
+        if(!$run) $this->error('Route not found for request method: '.$this->request->type, 1 );
     }
 
     /**
@@ -56,6 +57,7 @@ class OneFramework{
         }
         return $this->db;
     }
+
     private function defineConstants(){
         define('APP_DIR',__DIR__);
         define('CONTROLLERS_ROUTE',APP_DIR.'/controllers/');
@@ -74,6 +76,7 @@ class OneFramework{
         $this->request->request = $_POST;
         $this->request->server = $_SERVER;
         $this->request->cookie = $_COOKIE;
+        $this->request->type = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
     }
 
     /**
@@ -86,44 +89,36 @@ class OneFramework{
             ((APP_NAME != '') ?('/'.APP_NAME.$uri) : $uri);
     }
 
-
     /**
      * Process the request and Return a Response
-     * @param  uri key for the Route example: /book/{number}/edit
-     * @param  action
+     * @param $uri key for the Route example: /book/{number}/edit
+     * @param $function
      */
-    public function get($uri, $function){
+    public function get($uri,callable $function){
         $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
 
-        $route = new stdClass();
-        $route->route = $routeKey;
-        $route->function = $function;
-
         //save route and function
-        $this->routes[] = $route;
+        $this->routes['GET'][] = $this->createRoute($routeKey,$function);
     }
 
-    //REGION PRIVATE FUNCTIONS FOR THE APP CORE
-    private function processUri($route,&$slugs = array()){
-        $uri = isset($this->request->server['REQUEST_URI']) ? $this->request->server['REQUEST_URI'] : '/' ;
-        $func = $this->matchUriWithRoute($uri,$route,$slugs);
-        return $func ? $func : false;
+    /**
+     * Process a POST Request
+     * @param $uri
+     * @param $function
+     */
+    public function post($uri, $function){
+        $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
+        $this->routes['POST'][] = $this->createRoute($routeKey,$function);
     }
 
-    private function matchUriWithRoute($uri,$route,&$slugs){
-        $uri_segments = preg_split('/[\/]+/',$uri,null,PREG_SPLIT_NO_EMPTY);
-        //redirect if no locale is set
-        if(count($uri_segments) == 0 && $this->translate){
-            APP_NAME!= '' ?   $this->redirect("/".APP_NAME."/{$this->locales[0]}/") : $this->redirect("/{$this->locales[0]}/");
-        }
-        $route_segments = preg_split('/[\/]+/',$route->route,null,PREG_SPLIT_NO_EMPTY);
-
-        if($this->compareSegments($uri_segments,$route_segments,$slugs)){
-            //route matched
-            if($this->translate) $this->locale = $this->getSegment(0); //save locale
-            return $route->function; //Object route
-        }
-        return false;
+    /**
+     * Process a PUT Request
+     * @param $uri
+     * @param $function
+     */
+    public function put($uri, $function){
+        $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
+        $this->routes['PUT'][] = $this->createRoute($routeKey,$function);
     }
 
     /**
@@ -234,6 +229,62 @@ class OneFramework{
         exit;
     }
 
+
+    /*REGION PRIVATE FUNCTIONS FOR THE APP CORE*/
+    /**
+     * Traverse the routes and match the request
+     * @param string $method Request Method
+     * @param $slugs Save {vars}
+     * @return bool
+     */
+
+    private function traverseRoutes($method = 'GET',&$slugs){
+        if(isset($this->routes[$method])){
+            foreach($this->routes[$method] as $route)
+                if($func = $this->processUri($route,$slugs)){
+                    //call callback function with params in slugs
+                    call_user_func_array($func,$slugs);
+                    return true;
+                }
+        }
+        return false;
+    }
+
+    private function processUri($route,&$slugs = array()){
+        $uri = isset($this->request->server['REQUEST_URI']) ? $this->request->server['REQUEST_URI'] : '/' ;
+        $func = $this->matchUriWithRoute($uri,$route,$slugs);
+        return $func ? $func : false;
+    }
+
+    private function matchUriWithRoute($uri,$route,&$slugs){
+        $uri_segments = preg_split('/[\/]+/',$uri,null,PREG_SPLIT_NO_EMPTY);
+        //redirect if no locale is set
+        if(count($uri_segments) == 0 && $this->translate){
+            APP_NAME!= '' ?   $this->redirect("/".APP_NAME."/{$this->locales[0]}/") : $this->redirect("/{$this->locales[0]}/");
+        }
+        $route_segments = preg_split('/[\/]+/',$route->route,null,PREG_SPLIT_NO_EMPTY);
+
+        if($this->compareSegments($uri_segments,$route_segments,$slugs)){
+            //route matched
+            if($this->translate) $this->locale = $this->getSegment(0); //save locale
+            return $route->function; //Object route
+        }
+        return false;
+    }
+
+    /**
+     * Create an object Route
+     * @param $routeKey Unique key
+     * @param callable $function executable
+     * @return stdClass
+     */
+    private function createRoute($routeKey,callable $function){
+        $route = new stdClass();
+        $route->route = $routeKey;
+        $route->function = $function;
+        return $route;
+    }
+
     /**  Match 2 uris
      * @param $uri_segments
      * @param $route_segments
@@ -252,7 +303,6 @@ class OneFramework{
             else if($segment_route != $segment && preg_match('/^{[^\/]*}$/',$segment_route) != 1) return false;
 
         }
-
         //match with every segment
         return true;
     }

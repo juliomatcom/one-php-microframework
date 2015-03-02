@@ -1,14 +1,16 @@
 ##ONE <i> PHP Minimalist MVC Framework.</i>
-Only 1 file (Easy readable, adaptable). Not MVC required. Ready to go.
+Only 1 file (Easy readable, adaptable). Not MVC required. Ready to go.  
 Perfect fit in small projects and web services, only use what you need as you want.
 ####Features:
 #####1- Route system (And generator for views)
-#####2- Native localizations by URL (Available in controller and views)
+#####2- Easy and clean manage (GET, POST, PUT) requests
+#####3- Native localizations by URL (Available in controller and views)
 #####3- Response (+load Views)
-#####4- Inspired in Symfony and ExpressJS       
+#####4- Inspired in Symfony and ExpressJS    
+#####5- Zero config
 
 ###Add to your project:
-1-Install with composer or download zip:         
+1-Install with Composer or download zip:         
  
       
 ``` 
