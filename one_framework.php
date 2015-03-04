@@ -1,9 +1,10 @@
 <?php
 /**
  * One PHP MVC Micro Framework
+ * Version 0.0.4
  * @author Julio Cesar Martin
- * Twitter @juliomatcom - Email juliomatcom@yandex.com
- * Feel free to contact me any time
+ * juliomatcom@yandex.com
+ * Contribute to the project in Github
  * http://oneframework.julces.com/
  *
  * Controllers must be in APP_DIR/controllers
@@ -12,10 +13,11 @@
  * Assets must be in APP_DIR/assets/
  */
 class OneFramework{
+    //instances vars and predefined configs
     protected $request;
     protected $db;
     protected $routes = array();
-    //set this value to True if you want to get access to translations
+    //set this value to True if you want to get access to translations by URL
     protected $translate = false;
     //here the value of the locale requested by url (segment 1)
     protected $locale = null;
@@ -353,6 +355,11 @@ class View
     protected $framework;
     protected $src;
 
+    /**
+     * @param $src Source file to load
+     * @param array $vars Associative key , values
+     * @param null $framework isntance
+     */
     public function __construct($src,array $vars,$framework = null){
         $this->data = $vars;
         $this->framework = $framework;
@@ -365,7 +372,9 @@ class View
      */
     public  function load(){
         $app = $this->framework;
-        $data = $this->data;
+        $data = $this->data; //deprecated, vars are passed directly since version 0.0.4
+        extract($this->data,EXTR_OVERWRITE);//set global all variables to the view
+
         if(file_exists($this->src))
             include_once($this->src); //scoped to this class
         else{

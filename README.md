@@ -1,13 +1,14 @@
 ##ONE <i> PHP Minimalist MVC Framework.</i>
-Only 1 file (Easy readable, adaptable). Not MVC required. Ready to go.  
-Perfect fit in small projects and web services, only use what you need as you want.
+Only 1 file (Easy readable). Not MVC required. Ready to go.  
+Perfect fit in small projects and web services, only use what you need as you want.   
+Keep your projects simple.
 ####Features:
 #####1- Route system (And generator for views)
 #####2- Easy and clean manage (GET, POST, PUT) requests
 #####3- Native localizations by URL (Available in controller and views)
 #####3- Response (+load Views)
 #####4- Inspired in Symfony and ExpressJS    
-#####5- Zero config
+#####5- Zero config - Agile development
 
 ###Add to your project:
 1-Install with Composer or download zip:        
@@ -29,6 +30,14 @@ $app->get('/',function() use ($app){//Action
 $app->listen();
 ```
 
+####Match a Route if and only is a POST request 
+```php
+//Action that only run with a POST request
+$app->post('/book/{id_book}/update',function() use ($app){
+    //save...
+});
+```
+
 ####MVC style could look like this:
 ![MVC folders](http://i60.tinypic.com/ne6hhl.png "MVC folders")
 
@@ -41,20 +50,15 @@ $book = getBook($id_book);
      return $app->Response('view_path.php',array('book' => $book));
 });     
 ```
-####Match a Route if and only is a POST request 
-```php
-//Action that only run with a POST request
-$app->post('/book/{id_book}/update',function() use ($app){
-    //save...
-});
-```
+
 ####View and translation
 ```php
 // /views/home.php
 // $app is pass as global variable to every View file
- <p>
-    <?php echo $app->trans('home_tittle'); ?>
- </p>
+  <p>   <?php echo $app->trans('home_tittle'); ?> </p>
+ <span> <?php echo $book->getAuthor(); ?> </span>
+
+
 ```
 The framework $app is globally accesible from any view loaded by Response().
 #### Translation file look like this
@@ -65,7 +69,10 @@ home_menu: Menu
 ```
 Every file inside /translations/ folder will be loaded automatically.
 ######If you want to see the  /index.php/ in all URLS change the defined constant: <i> APP_NAME</i> in the Framework class and delete the .htaccess from the project.   
-*Fell free to change everything you need and make a commit if you improve something.  
+###Contribute
+Found a bug? Have a good idea for improving One Php Framework?      
+Want to help with the documentation or translations?        
+Let us know, fork the project, created an issue or contact us.
 
 [Follow me @juliomatcom](https://twitter.com/juliomatcom    "Follow me and get in touch")  
 [http://oneframework.julces.com/](http://oneframework.julces.com/    "Official website")
