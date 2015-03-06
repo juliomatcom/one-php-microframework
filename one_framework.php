@@ -17,12 +17,14 @@ class OneFramework{
     protected $request;
     protected $db;
     protected $routes = array();
+
     //set this value to True if you want to get access to translations by URL
     protected $translate = false;
     //here the value of the locale requested by url (segment 1)
     protected $locale = null;
-    protected $locales = ['es','en','fr'];
+    protected $locales = ['es','en','fr'];//First value is the default locale
     protected $translations = array();
+
     protected $prod = false;
 
     /**
@@ -45,7 +47,13 @@ class OneFramework{
         $run = ($this->request->type != 'GET') ? $this->traverseRoutes($this->request->type,$slugs) : false;
         $run = $run ? $run : $this->traverseRoutes('GET',$slugs);
 
-        if(!$run) $this->error('Route not found for request method: '.$this->request->type, 1 );
+        if(!$run && (!isset($this->routes['respond'])) || empty($this->routes['respond']))
+            $this->error('Route not found for request method: '.$this->request->type, 1 );
+        else if(!$run){ //respond for all request;
+            if($this->translate) $this->locale = $this->getSegment(0);
+            $callback = $this->routes['respond']->function;
+            $callback();
+        }
     }
 
     /**
@@ -93,34 +101,53 @@ class OneFramework{
 
     /**
      * Process the request and Return a Response
-     * @param $uri key for the Route example: /book/{number}/edit
-     * @param $function
+     * @param $uri string for the Route example: /book/{number}/edit
+     * @param $callback function
      */
-    public function get($uri,callable $function){
+    public function get($uri,callable $callback){
         $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
 
         //save route and function
-        $this->routes['GET'][] = $this->createRoute($routeKey,$function);
+        $this->routes['GET'][] = $this->createRoute($routeKey,$callback);
     }
 
     /**
      * Process a POST Request
-     * @param $uri
-     * @param $function
+     * @param $uri string
+     * @param $callback function
      */
-    public function post($uri, $function){
+    public function post($uri, $callback){
         $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
-        $this->routes['POST'][] = $this->createRoute($routeKey,$function);
+        $this->routes['POST'][] = $this->createRoute($routeKey,$callback);
     }
 
     /**
      * Process a PUT Request
-     * @param $uri
-     * @param $function
+     * @param $uri string
+     * @param $callback function
      */
-    public function put($uri, $function){
+    public function put($uri, $callback){
         $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
-        $this->routes['PUT'][] = $this->createRoute($routeKey,$function);
+        $this->routes['PUT'][] = $this->createRoute($routeKey,$callback);
+    }
+
+    /**
+     * Process a DELETE Request
+     * @param $uri string
+     * @param $callback function
+     */
+    public function delete($uri, $callback){
+        $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
+        $this->routes['DELETE'][] = $this->createRoute($routeKey,$callback);
+    }
+
+    /**
+     * Process all Request
+     * @param $uri string
+     * @param $callback function
+     */
+    public function respond($callback){
+        $this->routes['respond'] = $this->createRoute('',$callback);
     }
 
     /**
