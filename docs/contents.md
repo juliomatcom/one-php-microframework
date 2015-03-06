@@ -7,6 +7,6 @@ Start and use One Framework is intuitive and take less than 5 minute, good codei
 ####3- [Views ](https://github.com/juliomatcom/one-php-framework/blob/master/docs/views.md "Render views from controllers with One Framework")
 ####4- [More](https://github.com/juliomatcom/one-php-framework/blob/master/docs/more.md "More documentation of the One Framework")
     
-#####This documentation is served in [oneframework.julces.com ](http://oneframework.julces.com "More documentation of the One Framework")
+#####This documentation is served in [oneframework.julces.com ](http://oneframework.julces.com/docs/ "More documentation of the One Framework")
 ######Contribute and improve this documentation.
 ######Click Edit and Fork the project.
