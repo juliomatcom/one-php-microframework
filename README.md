@@ -37,7 +37,7 @@ $app->respond(function() use ($app){
     echo 'Sorry this page does not exist';
 });
 ```
-##Read the [Documentation](https://github.com/juliomatcom/one-php-framework/blob/master/docs/contents.md )
+##Read the [Documentation](https://github.com/juliomatcom/one-php-framework/blob/master/docs/contents.md "See the official documentation of the One Framework")
 
 ######If you want to see the  /index.php/ in all URLS change the defined constant: <i> APP_NAME</i> in the Framework class and delete the .htaccess from the project.
 
