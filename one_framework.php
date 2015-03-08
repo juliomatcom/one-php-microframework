@@ -5,7 +5,7 @@
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Contribute to the project in Github
- * http://oneframework.julces.com/
+ * http://oneframework.net/
  *
  * Controllers must be in APP_DIR/controllers
  * Views must be in APP_DIR/views
@@ -32,7 +32,7 @@ class OneFramework{
      * @param bool $prod Enviroment, set to false for Enable Debugging
      */
     public function __construct($prod = false){
-        $this->prod = $prod;
+        $this->setEnviroment($prod);
         $this->defineConstants();
         $this->buildRequest();
         $this->loadTrans();
@@ -53,6 +53,18 @@ class OneFramework{
             if($this->translate) $this->locale = $this->getSegment(0);
             $callback = $this->routes['respond']->function;
             $callback();
+        }
+    }
+
+    /**
+     * Change eniroment to prod or not
+     * @param $prod bool
+     */
+    public function  setEnviroment($prod = false){
+        $this->prod = $prod;
+        if($prod){
+            // No show any errors
+            error_reporting(0);
         }
     }
 

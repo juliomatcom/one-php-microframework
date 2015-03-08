@@ -38,6 +38,6 @@ $app->respond(function() use ($app){
 
 ###[Keep reading documentation on Github](https://github.com/juliomatcom/one-php-framework/blob/master/docs/contents.md "See the official documentation of the One Framework")
 
-#####This documentation is served in [oneframework.julces.com ](http://oneframework.julces.com "More documentation of the One Framework")
+#####This documentation is served in [oneframework.net ](http://oneframework.net "More documentation of the One Framework")
 ######Contribute and improve this documentation.
 ######Click Edit and Fork the project.

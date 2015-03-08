@@ -37,7 +37,7 @@ $app->respond(function() use ($app){
     echo 'Sorry this page does not exist';
 });
 ```
-##Read the [Documentation](http://oneframework.julces.com/docs/ "See the official documentation in the One Framework website")
+##Read the [Documentation](http://oneframework.net/docs/ "See the official documentation in the One Framework website")
 
 
 ###Contribute, is easy!
@@ -46,4 +46,4 @@ Want to help with the documentation or translations?
 Let us know, fork the project, created an issue or contact us.
 
 [Follow me @juliomatcom](https://twitter.com/juliomatcom    "Follow me and get in touch")  
-[http://oneframework.julces.com/](http://oneframework.julces.com/    "Official website")
+[http://oneframework.net/](http://oneframework.net/    "Official website")
