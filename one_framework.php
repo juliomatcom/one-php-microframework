@@ -292,7 +292,8 @@ class OneFramework{
     }
 
     private function processUri($route,&$slugs = array()){
-        $uri = isset($this->request->server['REQUEST_URI']) ? $this->request->server['REQUEST_URI'] : '/' ;
+        $url = isset($this->request->server['REQUEST_URI']) ? $this->request->server['REQUEST_URI'] : '/' ;
+        $uri = parse_url($url, PHP_URL_PATH);
         $func = $this->matchUriWithRoute($uri,$route,$slugs);
         return $func ? $func : false;
     }
