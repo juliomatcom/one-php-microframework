@@ -47,8 +47,10 @@ class OneFramework{
         $run = ($this->request->type != 'GET') ? $this->traverseRoutes($this->request->type,$slugs) : false;
         $run = $run ? $run : $this->traverseRoutes('GET',$slugs);
 
-        if(!$run && (!isset($this->routes['respond'])) || empty($this->routes['respond']))
+        if(!$run && (!isset($this->routes['respond']) || empty($this->routes['respond']))){
             $this->error('Route not found for request method: '.$this->request->type, 1 );
+
+        }
         else if(!$run){ //respond for all request;
             if($this->translate) $this->locale = $this->getSegment(0);
             $callback = $this->routes['respond']->function;

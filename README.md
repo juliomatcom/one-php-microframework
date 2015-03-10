@@ -45,5 +45,5 @@ Found a bug? Have a good idea for improving One Php Framework?
 Want to help with the documentation or translations?        
 Let us know, fork the project, created an issue or contact us.
 
-[Follow me @juliomatcom](https://twitter.com/juliomatcom    "Follow me and get in touch")  
+[Follow @juliomatcom](https://twitter.com/juliomatcom    "Follow me and get in touch")
 [http://oneframework.net/](http://oneframework.net/    "Official website")
