@@ -1,7 +1,7 @@
 <?php
 /**
  * One PHP MVC Micro Framework
- * Version 0.1.4
+ * Version 0.1.5
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Contribute to the project in Github
@@ -187,6 +187,14 @@ class OneFramework{
         return $this->request;
     }
 
+    public function setStatusCode($status = 200){
+        if (!function_exists('http_response_code') && $status != 200)//PHP < 5.4
+        {//send header
+            header('X-PHP-Response-Code: '.$status, true, $status);
+            return $status;
+        }
+        else return http_response_code($status);
+    }
 
     /**
      * Translate a string
@@ -249,7 +257,16 @@ class OneFramework{
      * @param array $vars Data to pass to the View
      * @param array $headers Http Headers
      */
-    public function Response($view_filename,array $vars = array(),array $headers=array()){
+
+    /**
+     * @param $view_filename Source to the file
+     * @param array $vars Data to pass to the View
+     * @param int $status Set the response status code.
+     * @param array $headers Set response headers.
+     */
+    public function Response($view_filename,array $vars = array(),$status = 200, array $headers=array()){
+        $this->setStatusCode($status);
+
         if(count($headers)){//add extra headers
             foreach($headers as $key=>$header){
                 header($key.': '.$header);
@@ -384,6 +401,8 @@ class OneFramework{
             throw new Exception();
         }
     }
+
+
 }
 
 /**
