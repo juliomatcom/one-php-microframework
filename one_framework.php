@@ -1,7 +1,7 @@
 <?php
 /**
  * One PHP MVC Micro Framework
- * Version 0.1.5
+ * Version 0.1.6
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Contribute to the project in Github
@@ -188,12 +188,14 @@ class OneFramework{
     }
 
     public function setStatusCode($status = 200){
-        if (!function_exists('http_response_code') && $status != 200)//PHP < 5.4
-        {//send header
-            header('X-PHP-Response-Code: '.$status, true, $status);
-            return $status;
+        if($status != 200){
+            if (!function_exists('http_response_code'))//PHP < 5.4
+            {//send header
+                header('X-PHP-Response-Code: '.$status, true, $status);
+                return $status;
+            }
+            else return http_response_code($status);
         }
-        else return http_response_code($status);
     }
 
     /**
