@@ -1,7 +1,7 @@
 <?php
 /**
  * One PHP MVC Micro Framework
- * Version 0.0.4
+ * Version 0.1.4
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Contribute to the project in Github
@@ -120,7 +120,6 @@ class OneFramework{
      */
     public function get($uri,callable $callback){
         $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
-
         //save route and function
         $this->routes['GET'][] = $this->createRoute($routeKey,$callback);
     }
@@ -130,7 +129,7 @@ class OneFramework{
      * @param $uri string
      * @param $callback function
      */
-    public function post($uri, $callback){
+    public function post($uri,callable $callback){
         $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
         $this->routes['POST'][] = $this->createRoute($routeKey,$callback);
     }
@@ -140,7 +139,7 @@ class OneFramework{
      * @param $uri string
      * @param $callback function
      */
-    public function put($uri, $callback){
+    public function put($uri,callable $callback){
         $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
         $this->routes['PUT'][] = $this->createRoute($routeKey,$callback);
     }
@@ -150,7 +149,7 @@ class OneFramework{
      * @param $uri string
      * @param $callback function
      */
-    public function delete($uri, $callback){
+    public function delete($uri,callable $callback){
         $routeKey = $this->translate ? ('/{_locale}'.$uri) : $uri;
         $this->routes['DELETE'][] = $this->createRoute($routeKey,$callback);
     }
@@ -160,7 +159,7 @@ class OneFramework{
      * @param $uri string
      * @param $callback function
      */
-    public function respond($callback){
+    public function respond(callable $callback){
         $this->routes['respond'] = $this->createRoute('',$callback);
     }
 
