@@ -1,6 +1,18 @@
 ##One PHP Minimalist MVC Framework.
 One PHP is a microframework in one file with 2 simple class to help you develop easy and fast websites and webservices for webs 2.0 and allow you to create your own microframework easily.  
 
+####Basic Usage:
+```php
+//index.php file    
+require_once('one_framework.php');  
+$app = new OneFramework();      
+
+$app->get('/',function() use ($app){//Action
+    echo 'Hello world';     
+});     
+$app->listen();
+```
+
 ####Features:
 #####1- Route system (And generator for views)
 #####2- Easy and clean manage (GET, POST, PUT, DELETE) requests
@@ -15,22 +27,11 @@ composer create-project julces/oneframework
 ``` 
 2- Include the one_framework.php in your project and  copy the .htaccess file in the Root Folder for use the index.php as your front controller.     
 Verify that your virtual host point to the folder with the .htacess and index.php file inside       
-3- Initialize the class, add some routes-action with $app->get, ->post,etc. (See the example bellow).    
+3- Initialize the class, add some routes-action with $app->get(...),etc. (See the examples).    
 4- Run listen and open http://yourVirtualHost/
 
-####Basic Usage:
-```php
-//index.php file    
-require_once('one_framework.php');  
-$app = new OneFramework();      
 
-$app->get('/',function() use ($app){//Action
-    echo 'Hello world';     
-});     
-$app->listen();
-```
-
-####Respond all Request (if no match)
+####Basic Usage 2: Respond all Request (if no match)
 ```php
 $app->respond(function() use ($app){
     echo 'Sorry this page does not exist';
