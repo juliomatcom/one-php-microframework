@@ -246,8 +246,7 @@ class OneFramework extends CoreFramework{
         $run = $run ? $run : $this->traverseRoutes('GET',$this->routes,$slugs);
 
         if(!$run && (!isset($this->routes['respond']) || empty($this->routes['respond']))){
-            $this->error('Route not found for request method: '.$this->request->type, 1 );
-
+            $this->error("Route not found for Path: {$this->request->getRequestedUri()} and Method: {$this->request->getMethod()}. ", 1 );
         }
         else if(!$run){ //respond for all request;
             $callback = $this->routes['respond']->function;
@@ -324,6 +323,7 @@ class OneFramework extends CoreFramework{
             return false;
         }
         else{
+            $this->setStatusCode(500);//internal server error code
             $frw_msg =
                 "<h1>One Framework: Error</h1>
              <p>$msg</p><br/>";
