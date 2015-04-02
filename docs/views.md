@@ -12,12 +12,6 @@ $app->post('/books/',function() use ($app){
 });
 ```
 #####You can change the default directory of view in the constants of de Framework   
-####View and translation
-```php
-// /views/home.php
-// $app is pass as global variable to every View file
-  <p>   <?php echo $app->trans('home_tittle'); ?> </p>
- <span> <?php echo $book->getAuthor(); ?> </span>
 
 
 ```

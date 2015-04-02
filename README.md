@@ -1,12 +1,10 @@
-##ONE <i> PHP Minimalist MVC Framework.</i>
-Only 1 file (Easy readable). Not MVC required. Ready to go.  
-Perfect fit in small projects and web services, only use what you need as you want.   
-Keep your projects simple.
+##One PHP Minimalist MVC Framework.
+One PHP is a microframework in one file with 2 simple class to help you develop easy and fast websites and webservices for webs 2.0 and allow you to create your own microframework easily.  
+
 ####Features:
 #####1- Route system (And generator for views)
 #####2- Easy and clean manage (GET, POST, PUT, DELETE) requests
-#####3- Native localizations by URL (Available in controller and views)
-#####3- Response (+load Views)
+#####3- Response + Status Code & Headers (+load Views)
 #####4- Inspired in Symfony and ExpressJS    
 #####5- Zero config - Agile development
 
@@ -45,5 +43,6 @@ Found a bug? Have a good idea for improving One Php Framework?
 Want to help with the documentation or translations?        
 Let us know, fork the project, created an issue or contact us.
 
-[Follow @juliomatcom](https://twitter.com/juliomatcom    "Follow me and get in touch")
+[Follow @OnePHP](https://twitter.com/OnePHP    "News and updates")
+
 [http://oneframework.net/](http://oneframework.net/    "Official website")
