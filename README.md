@@ -13,9 +13,10 @@ One PHP is a microframework in one file with 2 simple class to help you develop 
 ```     
 composer create-project julces/oneframework
 ``` 
-2- Include the one_framework.php in your project and  copy the .htaccess file in the root folder for use the index.php as your front controller.     
-3- Initialize the class, add some routes-action with get. (See the example bellow).    
-4- Run listen.  
+2- Include the one_framework.php in your project and  copy the .htaccess file in the Root Folder for use the index.php as your front controller.     
+Verify that your virtual host point to the folder with the .htacess and index.php file inside       
+3- Initialize the class, add some routes-action with $app->get, ->post,etc. (See the example bellow).    
+4- Run listen and open http://yourVirtualHost/
 
 ####Basic Usage:
 ```php

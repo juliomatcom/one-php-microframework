@@ -1,7 +1,7 @@
 <?php
 /**
  * Class CoreFramework
- * v 0.1.0
+ * v 0.1.1
  * This is the main components you need for your own microframework for web 2.0
  * OneFramework extends this Class
  * @author Julio Cesar Martin
@@ -14,7 +14,7 @@ abstract class CoreFramework{
     protected $routes = array();
 
     public function __construct(){
-        $this->buildRequest();
+        $this->request = Request::createFromGlobals();
     }
 
     //Most popular HTTP Methods
@@ -56,14 +56,6 @@ abstract class CoreFramework{
      *********** CORE FUNCTIONS ***********
      */
 
-    private function buildRequest(){
-        $this->request = new stdClass();
-        $this->request->query = $_GET;
-        $this->request->request = $_POST;
-        $this->request->server = $_SERVER;
-        $this->request->cookie = $_COOKIE;
-        $this->request->type = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
-    }
 
     /**
      * Traverse the routes and match the request, execute the callback
@@ -85,14 +77,14 @@ abstract class CoreFramework{
     }
 
     protected   function getSegment($segment_number){
-        $uri = isset($this->request->server['REQUEST_URI']) ? $this->request->server['REQUEST_URI'] : '/' ;
+        $uri = $this->request->getRequestedUri();
         $uri_segments = preg_split('/[\/]+/',$uri,null,PREG_SPLIT_NO_EMPTY);
 
         return isset($uri_segments[$segment_number]) ? $uri_segments[$segment_number] : false;
     }
 
     private function processUri($route,&$slugs = array()){
-        $url = isset($this->request->server['REQUEST_URI']) ? $this->request->server['REQUEST_URI'] : '/' ;
+        $url =$this->request->getRequestedUri();
         $uri = parse_url($url, PHP_URL_PATH);
         $func = $this->matchUriWithRoute($uri,$route,$slugs);
         return $func ? $func : false;
@@ -136,7 +128,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * Version 0.2.0
+ * Version 0.2.1
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP
@@ -250,7 +242,7 @@ class OneFramework extends CoreFramework{
     public function listen(){
         $slugs = array();
 
-        $run = ($this->request->type != 'GET') ? $this->traverseRoutes($this->request->type,$this->routes,$slugs) : false;
+        $run = ($this->request->getMethod() != 'GET') ? $this->traverseRoutes($this->request->getMethod(),$this->routes,$slugs) : false;
         $run = $run ? $run : $this->traverseRoutes('GET',$this->routes,$slugs);
 
         if(!$run && (!isset($this->routes['respond']) || empty($this->routes['respond']))){
@@ -365,6 +357,77 @@ class Route{
     public function __construct($routeKey = "",callable $func){
         $this->route = $routeKey;
         $this->function = $func;
+    }
+}
+
+/**
+ * Class Request
+ * Manage request params
+ */
+class Request{
+    private $get;
+    private $post;
+    private $files;
+    private $server;
+    private $cookie;
+    private $method;
+    private $requested_uri;
+
+    public function __construct(array $GET = array(),array $POST = array(),array $FILES = array(),array $SERVER = array(),array $COOKIE = array()){
+        $this->get = $GET;
+        $this->post = $POST;
+        $this->files = $FILES;
+        $this->server = $SERVER;
+        $this->cookie = $COOKIE;
+        $this->method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
+        $this->requested_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/' ;
+    }
+
+    public static function createFromGlobals(){
+        return new Request($_GET,$_POST,$_FILES,$_SERVER,$_COOKIE);
+    }
+
+    /**
+     * Get query param passed by URL
+     * @param $key
+     * @return value or false
+     */
+    public function get($key){
+        return isset($this->get[$key]) ? $this->get[$key] : false;
+    }
+
+    /**
+     * Get post variables
+     * @param $key
+     * @return value or false
+     */
+    public function post($key){
+        return isset($this->post[$key]) ? $this->post[$key] : false;
+    }
+
+    public function server($key){
+        return isset($this->server[$key]) ? $this->server[$key] : false;
+    }
+
+    public function cookie($key){
+        return isset($this->cookie[$key]) ? $this->cookie[$key] : false;
+    }
+
+    /**
+     * Get headers received
+     * @param $key
+     * @return value or false
+     */
+    public function header($key){
+        return isset($_SERVER['HTTP_'.strtoupper($key)]) ? $_SERVER['HTTP_'.strtoupper($key)] : false;
+    }
+
+    public function getMethod(){
+        return $this->method;
+    }
+
+    public function  getRequestedUri(){
+        return $this->requested_uri;
     }
 }
 
