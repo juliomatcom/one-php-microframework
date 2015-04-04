@@ -7,8 +7,6 @@
 ####1- First check the constants defined in  the defineConstants method in the Kernel
 ####2- Add your custom methods or libraries 
 
-###[Keep reading documentation on Github](https://github.com/juliomatcom/one-php-framework/blob/master/docs/contents.md "See the official documentation of the One Framework")
-
 #####This documentation is served in [oneframework.net ](http://oneframework.net/docs/ "More documentation of the One Framework")
 ######Contribute and improve this documentation.
 ######Click Edit and Fork the project.

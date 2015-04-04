@@ -26,8 +26,6 @@ The $app var and Vars passed  to Views are globally accesible from any view load
 
 ###Next: [More](https://github.com/juliomatcom/one-php-framework/blob/master/docs/more.md "More documentation of the One Framework")
 
-###[Keep reading documentation on Github](https://github.com/juliomatcom/one-php-framework/blob/master/docs/contents.md "See the official documentation of the One Framework")
-
 #####This documentation is served in [oneframework.net ](http://oneframework.net/docs/ "More documentation of the One Framework")
 ######Contribute and improve this documentation.
 ######Click Edit and Fork the project.

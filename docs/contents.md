@@ -22,7 +22,6 @@ Start and use One Framework is intuitive and take less than 5 minute, good codei
 ```
 
 
-
 #####This documentation is served in [oneframework.net ](http://oneframework.net/docs/ "More documentation of the One Framework")
 ######Contribute and improve this documentation.
 ######Click Edit and Fork the project.
