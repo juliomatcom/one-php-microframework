@@ -5,6 +5,7 @@ This is the directory structure you will end up with following the instructions 
     |-- ROOT
     |       |-- .htacess
     |       |-- index.php
+    |       |-- one_framework.php
     |       |-- views/
     |       |-- assets/
     
