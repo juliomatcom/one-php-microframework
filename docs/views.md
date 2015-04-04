@@ -11,11 +11,20 @@ $app->post('/books/',function() use ($app){
      return $app->Response('books_list_view.php',array('books' => $books));
 });
 ```
-#####You can change the default directory of view in the constants of de Framework   
+####You can serve static files in your views files just locating them in the top of Root folder '/'  like: ( See [Folder structure ](https://github.com/juliomatcom/one-php-framework/blob/master/docs/structure.md "Folder structure Normal or MVC") ) 
 
+```html
+<!-- file: /views/home.php -->
+    <!-- Bootstrap Core CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Custom CSS -->
+    <link href="/assets/css/one-page-wonder.css" rel="stylesheet">
 ```
-####The $app var and Vars passed  to Views are globally accesible from any view loaded by Response().
+#####You can change the default directory of view in the constants of de Framework   
+The $app var and Vars passed  to Views are globally accesible from any view loaded by Response().
+
+###Next: [More](https://github.com/juliomatcom/one-php-framework/blob/master/docs/more.md "More documentation of the One Framework")
 
 ###[Keep reading documentation on Github](https://github.com/juliomatcom/one-php-framework/blob/master/docs/contents.md "See the official documentation of the One Framework")
 

@@ -14,6 +14,8 @@ $app->post('/book/{id_book}/update',function($id_book) use ($app){
 });
 ```
 
+###Next: [Views ](https://github.com/juliomatcom/one-php-framework/blob/master/docs/views.md "Render views from controllers with One Framework")
+
 ###[Keep reading documentation on Github](https://github.com/juliomatcom/one-php-framework/blob/master/docs/contents.md "See the official documentation of the One Framework")
 
 #####This documentation is served in [oneframework.net ](http://oneframework.net/docs/ "More documentation of the One Framework")

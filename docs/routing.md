@@ -36,6 +36,8 @@ $app->respond(function() use ($app){
 </a>
 ```
 
+###Next: [Controllers ](https://github.com/juliomatcom/one-php-framework/blob/master/docs/controllers.md "Using your controllers with One Framework")
+
 ###[Keep reading documentation on Github](https://github.com/juliomatcom/one-php-framework/blob/master/docs/contents.md "See the official documentation of the One Framework")
 
 #####This documentation is served in [oneframework.net ](http://oneframework.net "More documentation of the One Framework")
