@@ -1,4 +1,4 @@
-##ONE PHP Framework Documentation
+##ONE PHP Micro Framework Documentation
 ###Routing:
 
 ####Action on GET Request:
@@ -36,7 +36,7 @@ $app->respond(function() use ($app){
 </a>
 ```
 
-###Next: [Controllers ](https://github.com/juliomatcom/one-php-framework/blob/master/docs/controllers.md "Using your controllers with One Framework")
+###Next: [Controllers ](https://github.com/juliomatcom/one-php-microframework/blob/master/docs/controllers.md "Using your controllers with One Framework")
 
 #####This documentation is served in [oneframework.net ](http://oneframework.net "More documentation of the One Framework")
 ######Contribute and improve this documentation.

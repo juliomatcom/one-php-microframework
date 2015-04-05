@@ -246,7 +246,7 @@ class OneFramework extends CoreFramework{
         $run = $run ? $run : $this->traverseRoutes('GET',$this->routes,$slugs);
 
         if(!$run && (!isset($this->routes['respond']) || empty($this->routes['respond']))){
-            $this->error("Route not found for Path: {$this->request->getRequestedUri()} and Method: {$this->request->getMethod()}. ", 1 );
+            $this->error("Route not found for Path: '{$this->request->getRequestedUri()}' and Method: '{$this->request->getMethod()}''. ", 1 );
         }
         else if(!$run){ //respond for all request;
             $callback = $this->routes['respond']->function;
@@ -465,7 +465,7 @@ class View
             include_once($this->src); //scoped to this class
         else{
             if($this->framework && !$this->framework->getEnviroment())
-                throw new Exception("ONE Framework: View filename: {$this->src} NOT found in ". VIEWS_ROUTE);
+                throw new Exception("ONE Micro Framework: View filename: {$this->src} NOT found in ". VIEWS_ROUTE);
         }
     }
 }

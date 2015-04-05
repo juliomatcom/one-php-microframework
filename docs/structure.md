@@ -1,4 +1,4 @@
-##ONE PHP Framework Documentation   
+##ONE PHP Micro Framework Documentation
 
 This is the directory structure you will end up with following the instructions in the Installation Guide.
 ###Regular
@@ -21,7 +21,7 @@ or
     |       |--     |-- views/
     |       |-- assets/
 
-###Next: [Routing ](https://github.com/juliomatcom/one-php-framework/blob/master/docs/routing.md "Start with routings")
+###Next: [Routing ](https://github.com/juliomatcom/one-php-microframework/blob/master/docs/routing.md "Start with routings")
 
 #####This documentation is served in [oneframework.net ](http://oneframework.net/docs/ "More documentation of the One Framework")
 ######Contribute and improve this documentation.

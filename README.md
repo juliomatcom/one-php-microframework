@@ -1,5 +1,5 @@
-##One PHP Framework:
-One PHP is a lightweight Rest Microframework in one file with 2 simple class to help you develop easy and fast websites and webservices for webs 2.0 and allow you to create your own microframework easily.
+##One PHP Micro Framework:
+One PHP is a lightweight Rest-first micro framework in one file with 2 simple class to help you develop easy and fast websites and webservices for webs 2.0 and allow you to create your own microframework easily.
 
 ####Basic Usage:
 ```php
@@ -38,10 +38,10 @@ $app->respond(function() use ($app){
 });
 ```
 
-##Read the [Documentation](http://oneframework.net/docs/ "See the official documentation in the One Framework website")
+##Read the [Documentation](http://oneframework.net/docs/ "See the official documentation in the One Micro Framework website")
 
 ###Contribute, is easy!
-Found a bug? Have a good idea for improving One PHP Framework?      
+Found a bug? Have a good idea for improving One PHP Micro Framework?
 Want to help with the documentation or translations?        
 Let us know, fork the project, created an issue or contact us.
 
