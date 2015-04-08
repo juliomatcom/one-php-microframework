@@ -15,5 +15,9 @@ require_once('one_framework.php');
         echo "Hello $name";
     });
 
+    $app->respond(function() use ($app){
+        return $app->Response('This is a response with code 404.',array(),404);
+    });
+
     //Run
     $app->listen();

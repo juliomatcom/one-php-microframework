@@ -128,7 +128,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * Version 0.2.1
+ * Version 0.2.2
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP
@@ -246,7 +246,7 @@ class OneFramework extends CoreFramework{
         $run = $run ? $run : $this->traverseRoutes('GET',$this->routes,$slugs);
 
         if(!$run && (!isset($this->routes['respond']) || empty($this->routes['respond']))){
-            $this->error("Route not found for Path: '{$this->request->getRequestedUri()}' and Method: '{$this->request->getMethod()}''. ", 1 );
+            $this->error("Route not found for Path: '{$this->request->getRequestedUri()}' with HTTP Method: '{$this->request->getMethod()}. ", 1 );
         }
         else if(!$run){ //respond for all request;
             $callback = $this->routes['respond']->function;
@@ -283,12 +283,12 @@ class OneFramework extends CoreFramework{
      */
 
     /**
-     * @param $view_filename Source to the file
+     * @param $filename string src or content
      * @param array $vars Data to pass to the View
      * @param int $status Set the response status code.
      * @param array $headers Set response headers.
      */
-    public function Response($view_filename,array $vars = array(),$status = 200, array $headers=array()){
+    public function Response($filename,array $vars = array(),$status = 200, array $headers=array()){
         $this->setStatusCode($status);
 
         if(count($headers)){//add extra headers
@@ -297,8 +297,11 @@ class OneFramework extends CoreFramework{
             }
         }
         //pass to the view
-        $view = new View(VIEWS_ROUTE.$view_filename,$vars,$this);
-        $view->load();
+        if(file_exists(VIEWS_ROUTE.$filename)){
+            $view = new View(VIEWS_ROUTE.$filename,$vars,$this);
+            $view->load();
+        }
+        else echo $filename;
         exit;
     }
 

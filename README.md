@@ -34,7 +34,7 @@ Verify that your virtual host point to the folder with the .htacess and index.ph
 ####Basic Usage 2: Respond all Request (if no match)
 ```php
 $app->respond(function() use ($app){
-    echo 'Sorry this page does not exist';
+    return $app->Response('Sorry this page does not exist',array(),404);
 });
 ```
 
