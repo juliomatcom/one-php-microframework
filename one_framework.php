@@ -128,7 +128,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * Version 0.2.2
+ * Version 0.2.3
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP
@@ -162,7 +162,7 @@ class OneFramework extends CoreFramework{
     public function  setEnviroment($prod = false){
         $this->prod = $prod;
         if($prod){
-            // No show any errors
+            // No display any errors
             error_reporting(0);
         }
     }
@@ -375,6 +375,7 @@ class Request{
     private $cookie;
     private $method;
     private $requested_uri;
+    private $body = null;
 
     public function __construct(array $GET = array(),array $POST = array(),array $FILES = array(),array $SERVER = array(),array $COOKIE = array()){
         $this->get = $GET;
@@ -414,6 +415,16 @@ class Request{
 
     public function cookie($key){
         return isset($this->cookie[$key]) ? $this->cookie[$key] : false;
+    }
+
+    /**
+     * Returns the Request Body content from POST,PUT
+     * For more info see: http://php.net/manual/en/wrappers.php.php
+     */
+    public function getBody(){
+        if($this->body == null)
+            $this->body = file_get_contents('php://input');
+        return $this->body;
     }
 
     /**

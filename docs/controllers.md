@@ -13,7 +13,7 @@ $app->post('/books/',function() use ($app){
      $handler = new BookHandler();
      $book = $handler->create( $app->getRequest() );
      
-     return $app->Response('view.php',array('book' => $book));
+     return $app->Response('view.php',array('book' => $book),201);
 });
 
 $app->get('/books/{id_book}/',function($id_book) use ($app){
