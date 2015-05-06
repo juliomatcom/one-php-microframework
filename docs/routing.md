@@ -14,10 +14,17 @@ $app->listen();
 ```
 
 ####Action on POST Request with slugs: (same with PUT and DELETE)
+#####Slugs are defined by {x} or :x  inside a Route    
+
+ Examples   
 ```php
 //$id_book will be the value passed on the URL
-$app->post('/book/{id_book}/update',function($id_book) use ($app){
-    //save...
+$app->put('/book/:id_book/',function($id_book) use ($app){
+    //update...
+});
+
+$app->delete('/book/{id_book}/',function($id_book) use ($app){
+    //delete...
 });
 ```
 ####Respond all Request (if no match)

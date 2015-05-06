@@ -1,5 +1,5 @@
 ##ONE PHP Micro Framework Documentation
-Start and use One Micro Framework is intuitive and take less than 5 minute, good codeing!.
+Just 2 simple class to help you develop easy and fast websites and webservices for webs 2.0 and allow you to create your own microframework easily.
 
 #### Table of contents:
 ####1- [Folder structure ](https://github.com/juliomatcom/one-php-microframework/blob/master/docs/structure.md "Folder structure Normal or MVC")

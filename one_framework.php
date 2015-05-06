@@ -1,7 +1,7 @@
 <?php
 /**
  * Class CoreFramework
- * v 0.1.1
+ * v 0.1.2
  * This is the main components you need for your own microframework for web 2.0
  * OneFramework extends this Class
  * @author Julio Cesar Martin
@@ -114,8 +114,8 @@ abstract class CoreFramework{
         foreach($uri_segments as $segment_index=>$segment){
 
             $segment_route = $route_segments[$segment_index];
-            //different segments must be an {slug}
-            $is_slug = preg_match('/^{[^\/]*}$/',$segment_route);
+            //different segments must be an {slug} | :slug
+            $is_slug = preg_match('/^{[^\/]*}$/',$segment_route) || preg_match('/^:[^\/]*/',$segment_route);
             if($is_slug)
                 $slugs[] = $segment;//save slug key => value
             else if($segment_route != $segment && $is_slug != 1) return false;
@@ -128,7 +128,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * Version 0.2.3
+ * Version 0.3.1
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP

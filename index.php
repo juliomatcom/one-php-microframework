@@ -3,15 +3,15 @@
 //remember enable the .htacess in this folder
 require_once('one_framework.php');
 
-    //load Micro Framework
+    //load Micro Framework with debug enabled
     $app = new OneFramework();
 
     $app->get('/',function() use ($app){//Action on the Root URL
         echo 'Hello world';
     });
 
-    //test with slug in URL
-    $app->get('/{name}',function($name) use ($app){
+    //test with slug in URL ( ':name' = '{name}' )
+    $app->get('/:name/',function($name) use ($app){
         echo "Hello $name";
     });
 

@@ -1,7 +1,7 @@
 ##One PHP Micro Framework:
-One PHP is a *lightweight/minimalist* Restful micro framework in one file with 2 simple class to help you develop easy and fast websites and webservices for webs 2.0 and allow you to create your own microframework easily.
+One PHP is An extremely light-weight and small Restful Micro-Framework MVC for Web 2.0 in one file, based on Symfony and ExpressJS. Zero config.         
 
-####Simplest sage:
+####Simplest usage:
 ```php
 //index.php file    
 require_once('one_framework.php');  
