@@ -1,14 +1,14 @@
 {
     "name": "julces/oneframework",
     "type": "library",
-    "description": "One - PHP Minimalist MVC Framework",
-    "keywords": ["One","Micro","Minimalist","Framework","PHP"],
+    "description": "One PHP Restful Microframework",
+    "keywords": ["One","Micro","Minimalist","Restful","PHP","Microframework"],
     "homepage": "https://github.com/juliomatcom/one-php-microframework",
     "license": "MIT",
     "authors": [
         {
             "name": "Julio Cesar Martin",
-            "email": "julio@yandex.com",
+            "email": "juliomatcom@yandex.com",
             "homepage": "http://oneframework.net/"
         },
         {
