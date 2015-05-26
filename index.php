@@ -1,13 +1,13 @@
 <?php
 //One Micro Framework - Hello World
 //remember enable the .htacess in this folder
-require_once('one_framework.php');
+require_once('src/OnePHP/one_framework.php');
 
 /*
 * Remember remove this examples to avoid collisions in routes
 */
     //load Micro Framework with debug enabled
-    $app = new OneFramework();
+    $app = new \OnePHP\Microframework\OneApp();
 
     $app->get('/', function() use ( $app ){//Action on the Root URL
         echo 'Hello world';
