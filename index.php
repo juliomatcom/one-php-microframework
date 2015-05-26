@@ -3,19 +3,22 @@
 //remember enable the .htacess in this folder
 require_once('one_framework.php');
 
+/*
+* Remember remove this examples to avoid collisions in routes
+*/
     //load Micro Framework with debug enabled
     $app = new OneFramework();
 
-    $app->get('/',function() use ($app){//Action on the Root URL
+    $app->get('/', function() use ( $app ){//Action on the Root URL
         echo 'Hello world';
     });
 
     //test with slug in URL ( ':name' = '{name}' )
-    $app->get('/:name/',function($name) use ($app){
-        echo "Hello $name";
+    $app->get('/:name', function( $name ) use ( $app ){
+        return $app->Response("<h1> Hello <small>$name</small> </h1>");
     });
 
-    $app->respond(function() use ($app){
+    $app->respond( function() use ( $app ){
         return $app->Response('This is a response with code 404.',array(),404);
     });
 

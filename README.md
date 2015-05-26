@@ -1,9 +1,11 @@
 ##One PHP Micro Framework:
 One PHP is An extremely light-weight and small Restful Micro-Framework MVC for Web 2.0 in one file, based on Symfony and ExpressJS. Zero config.   
 
+
 [![Latest Stable Version](https://poser.pugx.org/julces/oneframework/v/stable)](https://packagist.org/packages/julces/oneframework)
 [![Latest Unstable Version](https://poser.pugx.org/julces/oneframework/v/unstable)](https://packagist.org/packages/julces/oneframework)
-[![License](https://poser.pugx.org/julces/oneframework/license)](https://packagist.org/packages/julces/oneframework)
+[![License](https://poser.pugx.org/julces/oneframework/license)](https://packagist.org/packages/julces/oneframework)   
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/e039505d-12de-455d-8dfc-d2a3ef67cdc4/mini.png)](https://insight.sensiolabs.com/projects/e039505d-12de-455d-8dfc-d2a3ef67cdc4)
 
 ####Simplest usage:
 ```php
@@ -11,8 +13,8 @@ One PHP is An extremely light-weight and small Restful Micro-Framework MVC for W
 require_once('one_framework.php');  
 $app = new OneFramework();      
 
-$app->get('/',function() use ($app){//Action
-    echo 'Hello world';     
+$app->get('/:name',function( $name ) use ($app){//Action
+    echo $name != '' ? 'Hello world' : "Hello $name";     
 });     
 $app->listen();
 ```
@@ -38,7 +40,7 @@ Verify that your virtual host point to the folder with the .htacess and index.ph
 ####Basic Usage 2: Respond all Request (if no match)
 ```php
 $app->respond(function() use ($app){
-    return $app->Response('Sorry this page does not exist',array(),404);
+    return $app->Response('<p> Sorry this page does not exist </p>',array(),404);
 });
 ```
 
