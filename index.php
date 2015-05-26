@@ -7,7 +7,7 @@ require_once('src/OnePHP/one_framework.php');
 * Remember remove this examples to avoid collisions in routes
 */
     //load Micro Framework with debug enabled
-    $app = new \OnePHP\Microframework\OneApp();
+    $app = new \OnePHP\App();
 
     $app->get('/', function() use ( $app ){//Action on the Root URL
         echo 'Hello world';

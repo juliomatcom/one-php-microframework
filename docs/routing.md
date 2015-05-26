@@ -4,8 +4,8 @@
 ####Action on GET Request:
 ```php
 //index.php file
-require_once('one_framework.php');
-$app = new OneFramework();
+require_once('src/OnePHP/one_framework.php');
+$app = new \OnePHP\App();
 
 $app->get('/',function() use ($app){//Action
     echo 'Hello world';

@@ -6,7 +6,7 @@ Include in your index.php (front controller) all your controllers files then jus
 ####Using Restful Actions on Books
 ```php
 // $id_book will be the value passed on the URL
-// file: /controllers/main.php
+// file: src/controllers/main.php
 
 //create
 $app->post('/books/',function() use ($app){

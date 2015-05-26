@@ -4,7 +4,7 @@
 ###To add a view just create .php files in your a new folder project named /views/ then use Response to render it:
 ####Rendering a view
 ```php
-// file: /controllers/book.php
+// file: /src/controllers/book.php
 // view is located in /views/books_list_view.php
 $app->post('/books/',function() use ($app){
      $books = $this->getBooks();

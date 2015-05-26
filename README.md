@@ -10,10 +10,10 @@ One PHP is An extremely light-weight and small Restful Micro-Framework MVC for W
 ####Simplest usage:
 ```php
 //index.php file    
-require_once('one_framework.php');  
-$app = new OneFramework();      
+require_once('src/OnePHP/one_framework.php');
+$app = new \OnePHP\App();
 
-$app->get('/:name',function( $name ) use ($app){//Action
+$app->get('/:name',function( $name ) use ( $app ){//Action
     echo $name != '' ? 'Hello world' : "Hello $name";     
 });     
 $app->listen();

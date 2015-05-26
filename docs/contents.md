@@ -12,8 +12,8 @@ Just 2 simple class to help you develop easy and fast websites and webservices f
 ####Simplest example:
 ```php
     //index.php file
-    require_once('one_framework.php');
-    $app = new OneFramework();
+    require_once('src/OnePHP/one_framework.php');
+    $app = new \OnePHP\App();
 
     $app->get('/',function() use ($app){//Action
         echo 'Hello world';
