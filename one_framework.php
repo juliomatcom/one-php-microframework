@@ -128,7 +128,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * Version 0.3.2
+ * Version 0.3.3
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP
@@ -252,6 +252,7 @@ class OneFramework extends CoreFramework{
             $callback = $this->routes['respond']->function;
             $callback();
         }
+        return true;
     }
     /**
      * Create a route to the app
@@ -272,7 +273,6 @@ class OneFramework extends CoreFramework{
 
     public function Redirect($href){
         echo header('Location: '.$href);
-        exit;
     }
 
     /**
@@ -302,7 +302,6 @@ class OneFramework extends CoreFramework{
             $view->load();
         }
         else echo $filename;
-        exit;
     }
 
     /**
@@ -312,7 +311,6 @@ class OneFramework extends CoreFramework{
     public function JsonResponse(array $data = array()){
         header('Content-Type: application/json');//set headers
         echo json_encode($data);
-        exit;
     }
 
     /**
@@ -460,7 +458,7 @@ class View
      * @param array $vars Associative key , values
      * @param null $framework isntance
      */
-    public function __construct($src,array $vars,$framework = null){
+    public function __construct($src,array $vars,OneFramework $framework = null){
         $this->data = $vars;
         $this->framework = $framework;
         $this->src = $src;
