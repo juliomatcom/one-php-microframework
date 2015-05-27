@@ -182,14 +182,17 @@ class App extends CoreFramework{
     }
 
     private function defineConstants(){
-        define('APP_DIR',__DIR__.'/../');
-        define('CONTROLLERS_ROUTE',APP_DIR.'/controllers/');
-        define('VIEWS_ROUTE',APP_DIR.'/views/');
+        define('APP_NAME','');//add front controller to URL
+
+        define('APP_DIR',__DIR__.'/../'); //if your project is in src/ like in documentation
+        define('VIEW_DIR',APP_DIR.'views/');
+        define('VIEWS_ROUTE',APP_DIR.'views/');//deprecated
+        define('CONTROLLERS_ROUTE',APP_DIR.'controllers/');
+
         define('DB_HOST','127.0.0.1');
         define('DB_USER','root');
         define('DB_PASSWORD','');
         define('DB_DATABASE','');
-        define('APP_NAME','');
     }
 
     /**
