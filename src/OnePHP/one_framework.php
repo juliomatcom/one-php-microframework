@@ -129,7 +129,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * Version 0.4.0
+ * Version 0.4.1b
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP
@@ -246,8 +246,7 @@ class App extends CoreFramework{
     public function listen(){
         $slugs = array();
 
-        $run = ($this->request->getMethod() != 'GET') ? $this->traverseRoutes($this->request->getMethod(),$this->routes,$slugs) : false;
-        $run = $run ? $run : $this->traverseRoutes('GET',$this->routes,$slugs);
+        $run = $this->traverseRoutes($this->request->getMethod(),$this->routes,$slugs);
 
         if(!$run && (!isset($this->routes['respond']) || empty($this->routes['respond']))){
             $this->error("Route not found for Path: '{$this->request->getRequestedUri()}' with HTTP Method: '{$this->request->getMethod()}. ", 1 );
