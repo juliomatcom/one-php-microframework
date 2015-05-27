@@ -11,7 +11,6 @@ Note: You can use controllers or not, but is always recomended.
     |       |--     |-- OnePHP/ 
     |       |--     |--         |-- one_framework.php
     |       |--     |-- controllers/    
-
     |       |--     |-- views/
     |       |-- assets/
 
