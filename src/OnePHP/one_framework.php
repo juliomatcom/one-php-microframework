@@ -58,7 +58,6 @@ abstract class CoreFramework{
      *********** CORE FUNCTIONS ***********
      */
 
-
     /**
      * Traverse the routes and match the request, execute the callback
      * @param string $method REQUEST_METHOD
@@ -140,7 +139,7 @@ abstract class CoreFramework{
  * Class App
  * Controllers must be in APP_DIR/controllers
  * Views must be in APP_DIR/views
- * Assets must be in APP_DIR/assets/
+ * Assets must be in APP_DIR/public/
  */
 class App extends CoreFramework{
     //instances vars and predefined configs
@@ -184,7 +183,7 @@ class App extends CoreFramework{
     private function defineConstants(){
         define('APP_NAME','');//add front controller to URL
 
-        define('APP_DIR',__DIR__.'/../'); //if your project is in src/ like in documentation
+        define('APP_DIR',__DIR__.'/../'); //if your project is in src/ like in documentation, if not correct this
         define('VIEW_DIR',APP_DIR.'views/');
         define('VIEWS_ROUTE',APP_DIR.'views/');//deprecated
         define('CONTROLLERS_ROUTE',APP_DIR.'controllers/');

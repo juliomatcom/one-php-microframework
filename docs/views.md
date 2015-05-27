@@ -5,7 +5,7 @@
 ####Rendering a view
 ```php
 // file: /src/controllers/book.php
-// view is located in /views/books_list_view.php
+// view is located in /src/views/books_list_view.php
 $app->post('/books/',function() use ($app){
      $books = $this->getBooks();
      return $app->Response('books_list_view.php',array('books' => $books));
@@ -16,10 +16,10 @@ $app->post('/books/',function() use ($app){
 ```html
 <!-- file: /views/home.php -->
     <!-- Bootstrap Core CSS -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/assets/css/one-page-wonder.css" rel="stylesheet">
+    <link href="/public/css/one-page-wonder.css" rel="stylesheet">
 ```
 #####You can change the default directory of view in the constants of de Framework   
 The $app var and Vars passed  to Views are globally accesible from any view loaded by Response().

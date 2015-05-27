@@ -1,7 +1,7 @@
 ##ONE PHP Micro Framework Documentation
 
 This is the directory structure you will end up with following the instructions in the Installation Guide.
-Note: You can use controllers or not, but is always recomended.
+Note: You can use controllers or not, but is always recomended for big projects.
 ####MVC
 
     |-- ROOT
@@ -12,7 +12,8 @@ Note: You can use controllers or not, but is always recomended.
     |       |--     |--         |-- one_framework.php
     |       |--     |-- controllers/    
     |       |--     |-- views/
-    |       |-- assets/
+    |       |--     |-- libs/
+    |       |-- public/
 
 ####All your code must go inside src/ folder.
 ###Next: [Routing ](https://github.com/juliomatcom/one-php-microframework/blob/master/docs/routing.md "Start with routings")
