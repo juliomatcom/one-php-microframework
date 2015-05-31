@@ -8,7 +8,7 @@
 // view is located in /src/views/books_list_view.php
 $app->post('/books/',function() use ($app){
      $books = $this->getBooks();
-     return $app->Response('books_list_view.php',array('books' => $books));
+     return $app->Response('books_list_view.php', array('books' => $books));
 });
 ```
 ####You can serve static files in your views files just locating them in the top of Root folder '/'  like: ( See [Folder structure ](https://github.com/juliomatcom/one-php-microframework/blob/master/docs/structure.md "Folder structure Normal or MVC") )

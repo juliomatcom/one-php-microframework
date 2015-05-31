@@ -29,16 +29,16 @@ $app->delete('/book/{id_book}/',function($id_book) use ($app){
 ```
 ####Respond all Request (if no match)
 ```php
-$app->respond(function() use ($app){
-    echo 'Sorry this page does not exist';
-});
+$app->respond( function() use ( $app ){
+    return $app->ResponseHTML('<p> This is a response with code 404. </p>', 404);
+    });
 ```
 
 ####Generating new routes with getRoute 
 ```php
-<a href="<?php echo $app->getRoute('/about'); ?>"> About </a>   
+<a href="<?php echo $app->generateRoute('/about'); ?>"> About </a>
 
-<a href="<?php echo $app->getRoute('/book/'.$id_book.'/edit'); ?>"> 
+<a href="<?php echo $app->generateRoute('/book/'.$id_book.'/edit'); ?>">
     Edit $book
 </a>
 ```

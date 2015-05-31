@@ -277,6 +277,10 @@ class App extends CoreFramework{
         return (APP_NAME != '') ?('/'.APP_NAME.$uri) : $uri;
     }
 
+    public function getRoute($uri){//deprecated since 0.5
+        return $this->generateRoute($uri);
+    }
+
     /**
      * Get current enviroment
      * @return bool True if Production is ON
