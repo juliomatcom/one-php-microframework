@@ -50,11 +50,13 @@ class OneFrameworkTest extends PHPUnit_Framework_TestCase
         $app->put('/put', $func);
         $app->delete('/delete', $func);
 
+        $routes = $app->getRoutes();
+
         //check if routes are found
-        $this->assertEquals('/get', $app->getRoutes()['GET'][0]->route );
-        $this->assertEquals('/post', $app->getRoutes()['POST'][0]->route );
-        $this->assertEquals('/put', $app->getRoutes()['PUT'][0]->route );
-        $this->assertEquals('/delete', $app->getRoutes()['DELETE'][0]->route );
+        $this->assertEquals('/get', $routes['GET'][0]->route );
+        $this->assertEquals('/post', $routes['POST'][0]->route );
+        $this->assertEquals('/put', $routes['PUT'][0]->route );
+        $this->assertEquals('/delete', $routes['DELETE'][0]->route );
     }
 
     private function tryMatch($route, $uri, array $expected_slugs = array() ){

@@ -5,7 +5,7 @@ One PHP is An extremely light-weight and small Restful Micro-Framework MVC for W
 [![Latest Stable Version](https://poser.pugx.org/julces/oneframework/v/stable)](https://packagist.org/packages/julces/oneframework)
 [![Latest Unstable Version](https://poser.pugx.org/julces/oneframework/v/unstable)](https://packagist.org/packages/julces/oneframework)
 [![License](https://poser.pugx.org/julces/oneframework/license)](https://packagist.org/packages/julces/oneframework)   
-
+######Required PHP >= 5.3    
 ####Simplest usage:
 ```php
 //index.php file    
@@ -19,11 +19,11 @@ $app->listen();
 ```
 
 ####Features:
-#####1- Route system (And generator for views)
+#####1- Route system 
 #####2- Easy and clean manage (GET, POST, PUT, DELETE...) requests
-#####3- Response with Status Code + Headers (+Views)
-#####4- Inspired in Symfony and ExpressJS    
-#####5- Zero config - Agile development
+#####3- Response with Status Code and Headers
+#####4- Load Views 
+#####5- Inspired in Symfony and ExpressJS   
 
 ###Add to your project:
 1-Install with Composer or download zip:        
