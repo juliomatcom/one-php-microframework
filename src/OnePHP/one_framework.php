@@ -136,7 +136,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * @version 0.5.0
+ * @version 0.5.1
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP
