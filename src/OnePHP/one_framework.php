@@ -1,9 +1,16 @@
 <?php
 namespace OnePHP;
 
+const APP_NAME = ''; //add front controller to URL
+//mysql config
+const DB_HOST = '127.0.0.1';
+const DB_USER = 'root';
+const DB_PASSWORD = '';
+const DB_DATABASE = '';
+
 /**
  * Class CoreFramework
- * v 0.1.2
+ * @version 0.2.0
  * This is the main components you need for your own microframework for web 2.0
  * OneFramework extends this Class
  * @author Julio Cesar Martin
@@ -44,7 +51,7 @@ abstract class CoreFramework{
      * @return int status code sent
      */
     public function setStatusCode($status = 200){
-        if($status != 200){
+        if ($status != 200){
             if (!function_exists('http_response_code'))//PHP < 5.4
             {//send header
                 header('X-PHP-Response-Code: '.$status, true, $status);
@@ -66,7 +73,7 @@ abstract class CoreFramework{
      * @return bool true if Route was found and callback executed, false otherwise
      */
     protected function traverseRoutes($method = 'GET',array $routes,array &$slugs){
-        if(isset($routes[$method])){
+        if (isset($routes[$method])){
             foreach($routes[$method] as $route)
                 if($func = $this->processUri($route,$slugs)){
                     //call callback function with params in slugs
@@ -77,7 +84,7 @@ abstract class CoreFramework{
         return false;
     }
 
-    protected   function getSegment($segment_number){
+    protected  function getSegment($segment_number){
         $uri = $this->request->getRequestedUri();
         $uri_segments = preg_split('/[\/]+/',$uri,null,PREG_SPLIT_NO_EMPTY);
 
@@ -91,12 +98,12 @@ abstract class CoreFramework{
         return $func ? $func : false;
     }
 
-    private function matchUriWithRoute($uri,$route,&$slugs){
+    static function matchUriWithRoute($uri,$route,&$slugs){
         $uri_segments = preg_split('/[\/]+/',$uri,null,PREG_SPLIT_NO_EMPTY);
 
         $route_segments = preg_split('/[\/]+/',$route->route,null,PREG_SPLIT_NO_EMPTY);
 
-        if($this->compareSegments($uri_segments,$route_segments,$slugs)){
+        if (CoreFramework::compareSegments($uri_segments,$route_segments,$slugs)){
             //route matched
             return $route->function; //Object route
         }
@@ -108,17 +115,17 @@ abstract class CoreFramework{
      * @param $route_segments
      * @return bool
      */
-    protected function CompareSegments($uri_segments,$route_segments,&$slugs){
+     static function CompareSegments($uri_segments,$route_segments,&$slugs){
 
-        if(count($uri_segments) != count($route_segments)) return false;
+        if (count($uri_segments) != count($route_segments)) return false;
 
-        foreach($uri_segments as $segment_index=>$segment){
-
+        foreach($uri_segments as $segment_index => $segment){
             $segment_route = $route_segments[$segment_index];
             //different segments must be an {slug} | :slug
-            $is_slug = preg_match('/^{[^\/]*}$/',$segment_route) || preg_match('/^:[^\/]*/',$segment_route);
-            if($is_slug)
-                $slugs[] = $segment;//save slug key => value
+            $is_slug = preg_match('/^{[^\/]*}$/',$segment_route) || preg_match('/^:[^\/]*/',$segment_route,$matches);
+
+            if ($is_slug)//Note php does not support named parameters
+                $slugs[ str_ireplace(array(':', '{', '}'), '', $segment_route) ] = $segment;//save slug key => value
             else if($segment_route != $segment && $is_slug != 1) return false;
 
         }
@@ -129,7 +136,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * Version 0.4.1b
+ * @version 0.5.0
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP
@@ -152,8 +159,22 @@ class App extends CoreFramework{
      */
     public function __construct($prod = false){
         parent::__construct();
+
+        define('APP_DIR', $this->getRootDir() .'/../'); //if your project is in src/ like in documentation, if not correct this
+        define('VIEW_DIR', APP_DIR .'views/');
+        define('CONTROLLER_DIR', APP_DIR .'controllers/');
+        define('VIEWS_ROUTE', APP_DIR .'views/');//deprecated since 0.4
+        define('CONTROLLERS_ROUTE', APP_DIR .'controllers/');//deprecated since 0.4
+
         $this->setEnviroment($prod);
-        $this->defineConstants();
+    }
+
+    /*
+     * Get framework Directory
+     */
+    public function getRootDir()
+    {
+        return __DIR__;
     }
 
     /**
@@ -175,23 +196,9 @@ class App extends CoreFramework{
     public function getDB(){
         $this->db = $this->db ? $this->db : new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
         if ($this->db->connect_errno) {
-            $this->error("Error connecting to database: ".DB_DATABASE."<br/> Info:". $this->db->connect_error);
+            $this->error('Error connecting to database: '.DB_DATABASE.'<br/> Info:'. $this->db->connect_error);
         }
         return $this->db;
-    }
-
-    private function defineConstants(){
-        define('APP_NAME','');//add front controller to URL
-
-        define('APP_DIR',__DIR__.'/../'); //if your project is in src/ like in documentation, if not correct this
-        define('VIEW_DIR',APP_DIR.'views/');
-        define('VIEWS_ROUTE',APP_DIR.'views/');//deprecated
-        define('CONTROLLERS_ROUTE',APP_DIR.'controllers/');
-
-        define('DB_HOST','127.0.0.1');
-        define('DB_USER','root');
-        define('DB_PASSWORD','');
-        define('DB_DATABASE','');
     }
 
     /**
@@ -257,12 +264,16 @@ class App extends CoreFramework{
         }
         return true;
     }
+
+    public function getRoutes(){
+        return $this->routes;
+    }
     /**
      * Create a route to the app
      * @param $uri
      * @return string new URL
      */
-    public function getRoute($uri){
+    public function generateRoute($uri){
         return (APP_NAME != '') ?('/'.APP_NAME.$uri) : $uri;
     }
 
@@ -286,34 +297,52 @@ class App extends CoreFramework{
      */
 
     /**
-     * @param $filename string src or content
+     * @param string $filename src or content
      * @param array $vars Data to pass to the View
      * @param int $status Set the response status code.
      * @param array $headers Set response headers.
+     * @param int $asText Echo as text
      */
-    public function Response($filename,array $vars = array(),$status = 200, array $headers=array()){
+    public function Response($filename = '', array $vars = array(), $status = 200, array $headers = array(),$asText = 0){
         $this->setStatusCode($status);
 
-        if(count($headers)){//add extra headers
-            foreach($headers as $key=>$header){
-                header($key.': '.$header);
-            }
+        if (count($headers)){//add extra headers
+            $this->addCustomHeaders($headers);
         }
         //pass to the view
-        if(file_exists(VIEWS_ROUTE.$filename)){
-            $view = new View(VIEWS_ROUTE.$filename,$vars,$this);
+        if (!$asText){
+            $view = new View(VIEWS_ROUTE.$filename, $vars, $this);
             $view->load();
         }
         else echo $filename;
     }
 
+    public function ResponseHTML($html = '', $status = 200, array $headers = array()){
+        return $this->Response($html, array(), $status, $headers, true);
+    }
+
     /**
-     * Return a new Json Object Response
-     * @param array $data Array to encode
+     * Send json encoded Response
+     * @param mixed $data
+     * @param int $status
+     * @param array $headers
      */
-    public function JsonResponse(array $data = array()){
-        header('Content-Type: application/json');//set headers
+    public function JsonResponse($data = null, $status = 200, array $headers = array() ){
+        $this->setStatusCode($status);
+
+        header('Content-Type: application/json');//set content type to Json
+        if (count($headers)){//add extra headers
+            $this->addCustomHeaders($headers);
+        }
+
         echo json_encode($data);
+    }
+
+
+    private function addCustomHeaders(array $headers = array()){
+        foreach($headers as $key=>$header){
+            header($key.': '.$header);
+        }
     }
 
     /**
@@ -321,8 +350,8 @@ class App extends CoreFramework{
      * @param string $msg
      * @param int $number
      */
-    private function error($msg='',$number = 0){
-        if($this->prod){
+    private function error($msg = '', $number = 0){
+        if ($this->prod){
             //do something here
             return false;
         }
@@ -341,7 +370,7 @@ class App extends CoreFramework{
 
             $frw_msg = $frw_msg." <h2>Trace:</h2>";
             echo $frw_msg;
-            throw new Exception();
+            throw new \Exception();
         }
     }
 }
@@ -358,7 +387,7 @@ class Route{
      * @param string $routeKey like /books/{id}/edit
      * @param callable $func Function
      */
-    public function __construct($routeKey = "",callable $func){
+    public function __construct($routeKey = '', callable $func){
         $this->route = $routeKey;
         $this->function = $func;
     }
@@ -423,7 +452,7 @@ class Request{
      * For more info see: http://php.net/manual/en/wrappers.php.php
      */
     public function getBody(){
-        if($this->body == null)
+        if ($this->body == null)
             $this->body = file_get_contents('php://input');
         return $this->body;
     }
@@ -461,7 +490,7 @@ class View
      * @param array $vars Associative key , values
      * @param null $framework isntance
      */
-    public function __construct($src,array $vars,App $framework = null){
+    public function __construct($src, array $vars = array(), App $framework = null){
         $this->data = $vars;
         $this->framework = $framework;
         $this->src = $src;
@@ -476,11 +505,11 @@ class View
         $data = $this->data; //deprecated, vars are passed directly since version 0.0.4
         extract($this->data,EXTR_OVERWRITE);//set global all variables to the view
 
-        if(file_exists($this->src))
+        if (file_exists($this->src))
             include_once($this->src); //scoped to this class
         else{
             if($this->framework && !$this->framework->getEnviroment())
-                throw new Exception("ONE Micro Framework: View filename: {$this->src} NOT found in ". VIEWS_ROUTE);
+                throw new \Exception("ONE Micro Framework error: View filename '{$this->src}' NOT found in '". VIEWS_ROUTE."', Maybe you need to change the App::APP_DIR or App::VIEWS_ROUTE Constant to your current folder structure.");
         }
     }
 }

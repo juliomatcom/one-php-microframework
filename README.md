@@ -1,7 +1,7 @@
 ##One PHP Micro Framework:
 One PHP is An extremely light-weight and small Restful Micro-Framework MVC for Web 2.0 in one file, based on Symfony and ExpressJS. Zero config.   
 
-
+[![Build Status](https://travis-ci.org/juliomatcom/one-php-microframework.svg?branch=master)](https://travis-ci.org/juliomatcom/one-php-microframework)
 [![Latest Stable Version](https://poser.pugx.org/julces/oneframework/v/stable)](https://packagist.org/packages/julces/oneframework)
 [![Latest Unstable Version](https://poser.pugx.org/julces/oneframework/v/unstable)](https://packagist.org/packages/julces/oneframework)
 [![License](https://poser.pugx.org/julces/oneframework/license)](https://packagist.org/packages/julces/oneframework)   
@@ -38,9 +38,9 @@ Verify that your virtual host point to the folder with the .htacess and index.ph
 
 ####Basic Usage 2: Respond all Request (if no match)
 ```php
-$app->respond(function() use ($app){
-    return $app->Response('<p> Sorry this page does not exist </p>',array(),404);
-});
+$app->respond( function() use ( $app ){
+    return $app->ResponseHTML('<p> This is a response with code 404. </p>', 404);
+    });
 ```
 
 ##Read the [Documentation](http://oneframework.net/docs/ "See the official documentation in the One Micro Framework website")
