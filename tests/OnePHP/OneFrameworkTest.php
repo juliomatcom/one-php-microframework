@@ -60,9 +60,8 @@ class OneFrameworkTest extends PHPUnit_Framework_TestCase
     }
 
     private function tryMatch($route, $uri, array $expected_slugs = array() ){
-        $testFunc =  function ( $name ) { };
 
-        $routeObj = new \OnePHP\Route( $route , $testFunc);
+        $routeObj = new \OnePHP\Route( $route , function ( $name ) { } );
 
         $uri_segments = preg_split('/[\/]+/',$uri,null,PREG_SPLIT_NO_EMPTY);
 
