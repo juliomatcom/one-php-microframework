@@ -22,3 +22,5 @@ matrix:
   allow_failures:
     - php: 7.0
     - php: hhvm
+
+script: "phpunit tests/OnePHP/"
