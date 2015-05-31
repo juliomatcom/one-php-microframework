@@ -5,7 +5,7 @@ One PHP is An extremely light-weight and small Restful Micro-Framework MVC for W
 [![Latest Stable Version](https://poser.pugx.org/julces/oneframework/v/stable)](https://packagist.org/packages/julces/oneframework)
 [![Latest Unstable Version](https://poser.pugx.org/julces/oneframework/v/unstable)](https://packagist.org/packages/julces/oneframework)
 [![License](https://poser.pugx.org/julces/oneframework/license)](https://packagist.org/packages/julces/oneframework)   
-######Required PHP >= 5.3    
+######Required PHP >= 5.4
 ####Simplest usage:
 ```php
 //index.php file    
