@@ -18,15 +18,19 @@ $app->get('/:name',function( $name ) use ( $app ){//Action
 $app->listen();
 ```
 
-####Features:
-#####1- Route system 
-#####2- Easy and clean manage (GET, POST, PUT, DELETE...) requests
-#####3- Response with Status Code and Headers
-#####4- Load Views 
-#####5- Inspired in Symfony and ExpressJS   
+####What is this good for?
+#####One PHP is perfect for you if you need write quickly small and fast Web 2.0 applications with:
+#####1- Restful Routes 
+#####2- Easy and clean manage (GET, POST, PUT, DELETE...) Requests
+#####3- Restful Responses with HTTP Status Code and custom Headers
+#####4- PHP native Views   
+
+###Do not use One PHP for:
+#####1- Full stack projects
+#####2- You need "ready to go" database libraries like Doctrine
 
 ###Add to your project:
-1-Install with Composer or download zip:        
+1-Install with Composer or download Master zip:        
 ```     
 composer create-project julces/oneframework
 ``` 
