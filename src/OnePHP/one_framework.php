@@ -134,7 +134,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * @version 0.5.2
+ * @version 0.5.3
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP
@@ -164,7 +164,7 @@ class App extends CoreFramework{
         define('VIEWS_ROUTE', APP_DIR .'views/');//deprecated since 0.4
         define('CONTROLLERS_ROUTE', APP_DIR .'controllers/');//deprecated since 0.4
 
-        $this->setEnviroment($prod);
+        $this->setEnvironment($prod);
     }
 
     /*
@@ -176,10 +176,10 @@ class App extends CoreFramework{
     }
 
     /**
-     * Change eniroment to prod or not
+     * Change environment to prod or not
      * @param $prod bool
      */
-    public function  setEnviroment($prod = false){
+    public function  setEnvironment($prod = false){
         $this->prod = $prod ? ENV_PROD : ENV_DEV;
     }
 
@@ -238,7 +238,7 @@ class App extends CoreFramework{
         $run = $this->traverseRoutes($this->request->getMethod(),$this->routes,$slugs);
 
         if(!$run && (!isset($this->routes['respond']) || empty($this->routes['respond']))){
-            return $this->error("Route not found for Path: '{$this->request->getRequestedUri()}' with HTTP Method: '{$this->request->getMethod()}. ", 1 );
+            return $this->error("Route not found for Path: '{$this->request->getRequestedUri()}' with HTTP Method: '{$this->request->getMethod()}'. ", 1 );
         }
         else if(!$run){ //respond for all request;
             $callback = $this->routes['respond']->function;
@@ -267,7 +267,7 @@ class App extends CoreFramework{
      * Get current enviroment
      * @return bool True if Production is ON
      */
-    public function getEnviroment(){
+    public function getEnvironment(){
         return $this->prod ? ENV_PROD : ENV_DEV;
     }
 
@@ -337,26 +337,26 @@ class App extends CoreFramework{
      * @param int $number
      */
     public function error($msg = '', $number = 0){
-        if ($this->getEnviroment() == ENV_PROD){
-            $this->setStatusCode(500);
+        $this->setStatusCode(500);//internal server error code
+
+        if ($this->getEnvironment() == ENV_PROD){
             echo "<h3>:( there was a problem with this request.</h3>
                     <p>Please try later or contact us.</p>";
         }
-        else{
-            $this->setStatusCode(500);//internal server error code
-            $frw_msg =
+        else{//debug enable
+            echo
                 "<h1>One Framework: Error</h1>
                  <p>$msg</p><br/>";
 
             switch($number){
                 case 1:
-                    $frw_msg = $frw_msg."<b>Note</b>: Routes begin always with '/' character.";
+                    echo "<b>Note</b>: Routes begin always with '/' character.";
                     break;
                 default: break;
             }
 
-            $frw_msg = $frw_msg." <h2>Trace:</h2>";
-            throw new \Exception($frw_msg);
+            echo " <h2>Trace:</h2>";
+            throw new \Exception($msg);
         }
         return false;
     }
@@ -496,8 +496,9 @@ class View
             include_once($this->src); //scoped to this class
         else{
             if($this->framework ){
-                if($app->getEnviroment() == ENV_DEV)
-                    throw new \Exception("ONE Micro Framework error: View filename '{$this->src}' NOT found in '". VIEWS_ROUTE."', Maybe you need to change the App::APP_DIR or App::VIEWS_ROUTE Constant to your current folder structure.");
+                if($app->getEnvironment() == ENV_DEV)
+                    return $app->error("View filename '{$this->src}' NOT found in '". VIEWS_ROUTE."'.<br/>
+                     Maybe you need to change the App::APP_DIR or App::VIEW_DIR Constant to your current folder structure.");
                 else
                     return $app->error();
             }
