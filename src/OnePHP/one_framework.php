@@ -1,12 +1,10 @@
 <?php
 namespace OnePHP;
 
-const APP_NAME = ''; //add front controller to URL
-//mysql config
-const DB_HOST = '127.0.0.1';
-const DB_USER = 'root';
-const DB_PASSWORD = '';
-const DB_DATABASE = '';
+const ENV_DEV = 0;
+const ENV_PROD = 1;
+const APP_NAME = ''; //add front controller to URL (change only if you know what are you doing)
+
 
 /**
  * Class CoreFramework
@@ -136,7 +134,7 @@ abstract class CoreFramework{
 
 /**
  * One PHP MVC Micro Framework
- * @version 0.5.1
+ * @version 0.5.2
  * @author Julio Cesar Martin
  * juliomatcom@yandex.com
  * Twitter @OnePHP
@@ -182,23 +180,7 @@ class App extends CoreFramework{
      * @param $prod bool
      */
     public function  setEnviroment($prod = false){
-        $this->prod = $prod;
-        if($prod){
-            // No display any errors
-            error_reporting(0);
-        }
-    }
-
-    /**
-     * Connect if needed, retrieve the database connection
-     * @return mysqli
-     */
-    public function getDB(){
-        $this->db = $this->db ? $this->db : new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
-        if ($this->db->connect_errno) {
-            $this->error('Error connecting to database: '.DB_DATABASE.'<br/> Info:'. $this->db->connect_error);
-        }
-        return $this->db;
+        $this->prod = $prod ? ENV_PROD : ENV_DEV;
     }
 
     /**
@@ -256,7 +238,7 @@ class App extends CoreFramework{
         $run = $this->traverseRoutes($this->request->getMethod(),$this->routes,$slugs);
 
         if(!$run && (!isset($this->routes['respond']) || empty($this->routes['respond']))){
-            $this->error("Route not found for Path: '{$this->request->getRequestedUri()}' with HTTP Method: '{$this->request->getMethod()}. ", 1 );
+            return $this->error("Route not found for Path: '{$this->request->getRequestedUri()}' with HTTP Method: '{$this->request->getMethod()}. ", 1 );
         }
         else if(!$run){ //respond for all request;
             $callback = $this->routes['respond']->function;
@@ -286,7 +268,7 @@ class App extends CoreFramework{
      * @return bool True if Production is ON
      */
     public function getEnviroment(){
-        return $this->prod;
+        return $this->prod ? ENV_PROD : ENV_DEV;
     }
 
     public function Redirect($href){
@@ -354,16 +336,17 @@ class App extends CoreFramework{
      * @param string $msg
      * @param int $number
      */
-    private function error($msg = '', $number = 0){
-        if ($this->prod){
-            //do something here
-            return false;
+    public function error($msg = '', $number = 0){
+        if ($this->getEnviroment() == ENV_PROD){
+            $this->setStatusCode(500);
+            echo "<h3>:( there was a problem with this request.</h3>
+                    <p>Please try later or contact us.</p>";
         }
         else{
             $this->setStatusCode(500);//internal server error code
             $frw_msg =
                 "<h1>One Framework: Error</h1>
-             <p>$msg</p><br/>";
+                 <p>$msg</p><br/>";
 
             switch($number){
                 case 1:
@@ -373,9 +356,9 @@ class App extends CoreFramework{
             }
 
             $frw_msg = $frw_msg." <h2>Trace:</h2>";
-            echo $frw_msg;
-            throw new \Exception();
+            throw new \Exception($frw_msg);
         }
+        return false;
     }
 }
 
@@ -512,8 +495,12 @@ class View
         if (file_exists($this->src))
             include_once($this->src); //scoped to this class
         else{
-            if($this->framework && !$this->framework->getEnviroment())
-                throw new \Exception("ONE Micro Framework error: View filename '{$this->src}' NOT found in '". VIEWS_ROUTE."', Maybe you need to change the App::APP_DIR or App::VIEWS_ROUTE Constant to your current folder structure.");
+            if($this->framework ){
+                if($app->getEnviroment() == ENV_DEV)
+                    throw new \Exception("ONE Micro Framework error: View filename '{$this->src}' NOT found in '". VIEWS_ROUTE."', Maybe you need to change the App::APP_DIR or App::VIEWS_ROUTE Constant to your current folder structure.");
+                else
+                    return $app->error();
+            }
         }
     }
 }
