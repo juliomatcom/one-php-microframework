@@ -36,7 +36,7 @@ composer create-project julces/oneframework
 5- **No dependencies**, add extra libraries only when you need it.   
 ####Do not use One PHP for:
 1- Full stack projects  
-2- You need **built in** database libraries like Doctrine and others
+2- You need **built in** big libraries like Doctrine and others
 
 
 
