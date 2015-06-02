@@ -13,21 +13,21 @@ require_once('src/OnePHP/one_framework.php');
 $app = new \OnePHP\App();
 
 $app->get('/:name',function( $name ) use ( $app ){//Action
-    echo $name != '' ? 'Hello world' : "Hello $name";     
-});     
+        echo $name != '' ? 'Hello world' : "Hello $name";     
+    });     
 $app->listen();
 ```
 
-####What is this good for?
+###What is this good for?
 #####One PHP is perfect for you if you need write quickly small and fast Web 2.0 applications with:
 #####1- Restful Routes 
 #####2- Easy and clean manage (GET, POST, PUT, DELETE...) Requests
 #####3- Restful Responses with HTTP Status Code and custom Headers
 #####4- PHP native Views   
-
+#####5- Extra libraries only when you need it, keep things simple   
 ###Do not use One PHP for:
 #####1- Full stack projects
-#####2- You need "ready to go" database libraries like Doctrine
+#####2- You need "built in" database libraries like Doctrine and others
 
 ###Add to your project:
 1-Install with Composer or download Master zip:        
