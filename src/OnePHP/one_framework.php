@@ -340,8 +340,9 @@ class App extends CoreFramework{
         $this->setStatusCode(500);//internal server error code
 
         if ($this->getEnvironment() == ENV_PROD){
-            echo "<h3>:( there was a problem with this request.</h3>
-                    <p>Please try later or contact us.</p>";
+            echo "<h2>:( </h2>
+                  <h3>Sorry there is a problem with this request.</h3>
+                  <p>Please try later or contact us.</p>";
         }
         else{//debug enable
             echo
