@@ -8,11 +8,14 @@ const APP_NAME = ''; //add front controller to URL (change only if you know what
 
 /**
  * Class CoreFramework
- * @version 0.2.0
  * This is the main components you need for your own microframework for web 2.0
  * OneFramework extends this Class
+ * Contribute in:
+ * https://github.com/juliomatcom/one-php-microframework
+ * Contact: juliomatcom@yandex.com
  * @author Julio Cesar Martin
- * juliomatcom@yandex.com
+ * @version 0.2.0
+
  */
 abstract class CoreFramework{
     //Main request Object
@@ -133,18 +136,19 @@ abstract class CoreFramework{
 }
 
 /**
- * One PHP MVC Micro Framework
- * @version 0.5.4
- * @author Julio Cesar Martin
- * juliomatcom@yandex.com
- * Twitter @OnePHP
- * Contribute to the project in Github
- * http://oneframework.net/
- *
  * Class App
+ * One PHP MVC Micro Framework
+ * Contact: juliomatcom@yandex.com
+ * Twitter @juliomatcom
+ * Contribute to the project in Github
+ * https://github.com/juliomatcom/one-php-microframework
+ *
  * Controllers must be in APP_DIR/controllers
  * Views must be in APP_DIR/views
  * Assets must be in APP_DIR/public/
+ *
+ * @version 0.5.4c
+ * @author Julio Cesar Martin
  */
 class App extends CoreFramework{
     //instances vars and predefined configs
@@ -386,6 +390,7 @@ class App extends CoreFramework{
 /**
  * Class Route
  * Formed by a string with the path and one callback function
+ * @author Julio Cesar Martin
  */
 class Route{
     public  $route;
@@ -404,6 +409,7 @@ class Route{
 /**
  * Class Request
  * Manage request params
+ * @author Julio Cesar Martin
  */
 class Request{
     private $get;
@@ -486,6 +492,7 @@ class Request{
 /**
  * Class View
  * Load a view File with access to data and Framework
+ * @author Julio Cesar Martin
  */
 class View
 {
