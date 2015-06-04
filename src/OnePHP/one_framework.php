@@ -147,7 +147,7 @@ abstract class CoreFramework{
  * Views must be in APP_DIR/views
  * Assets must be in APP_DIR/public/
  *
- * @version 0.5.4c
+ * @version 0.5.5
  * @author Julio Cesar Martin
  */
 class App extends CoreFramework{
@@ -280,13 +280,7 @@ class App extends CoreFramework{
     }
 
     /**
-     * Return a new HTTP response.
-     * @param string $view_filename Source to the file
-     * @param array $vars Data to pass to the View
-     * @param array $headers Http Headers
-     */
-
-    /**
+     * Return HTTP Response from view.
      * @param string $filename src or content
      * @param array $vars Data to pass to the View
      * @param int $status Set the response status code.
