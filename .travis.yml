@@ -21,4 +21,10 @@ matrix:
     - php: 7.0
     - php: hhvm
 
+before_install:
+  - composer self-update
+
+install:
+  - composer update --no-interaction --prefer-source --dev $COMPOSER_EXTRA_ARGS
+
 script: "phpunit ./tests/OnePHP/OneFrameworkTest.php"
