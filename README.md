@@ -14,7 +14,7 @@ require_once('src/OnePHP/one_framework.php');
 $app = new \OnePHP\App();
 
 $app->get('/:name',function( $name ) use ( $app ){//Action
-        echo "Hello $name";     
+        echo "Hello $name";    
     });     
 $app->listen();
 ```
