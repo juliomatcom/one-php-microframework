@@ -13,7 +13,7 @@ const APP_NAME = ''; //add front controller to URL (change only if you know what
  * https://github.com/juliomatcom/one-php-microframework
  * Contact: juliomatcom@yandex.com
  * @author Julio Cesar Martin
- * @version 0.2.0
+ * @version 0.2.1
 
  */
 abstract class CoreFramework{
@@ -150,7 +150,7 @@ abstract class CoreFramework{
  * Views must be in APP_DIR/views
  * Assets must be in APP_DIR/public/
  *
- * @version 0.5.5
+ * @version 0.6.0
  * @author Julio Cesar Martin
  */
 class App extends CoreFramework{

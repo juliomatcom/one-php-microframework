@@ -5,7 +5,7 @@ require_once(__DIR__.'/../../src/OnePHP/one_framework.php');
 /**
  * Class OneFrameworkTest
  * @author Julio Cesar Martin - juliomatcom@gmail.com
- * @version 0.1.0
+ * @version 0.2.0
  */
 class OneFrameworkTest extends PHPUnit_Framework_TestCase
 {
