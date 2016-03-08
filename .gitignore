@@ -3,4 +3,5 @@
 apigen.phar
 phpunit.phar
 .DS_Store
-srcÃ/.DS_Store
+srcï¿½/.DS_Store
+vendor

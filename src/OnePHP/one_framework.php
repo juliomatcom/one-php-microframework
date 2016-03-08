@@ -5,7 +5,6 @@ const ENV_DEV = 0;
 const ENV_PROD = 1;
 const APP_NAME = ''; //add front controller to URL (change only if you know what are you doing)
 
-
 /**
  * Class CoreFramework
  * This is the main components you need for your own microframework for web 2.0
@@ -28,10 +27,10 @@ abstract class CoreFramework{
     }
 
     //Most popular HTTP Methods
-    public abstract function get($uri,callable $callback);
-    public abstract function post($uri,callable $callback);
-    public abstract function put($uri,callable $callback);
-    public abstract function delete($uri,callable $callback);
+    public abstract function get($uri, callable $callback);
+    public abstract function post($uri, callable $callback);
+    public abstract function put($uri, callable $callback);
+    public abstract function delete($uri, callable $callback);
 
     /**
      * Start listen for requests
@@ -73,12 +72,12 @@ abstract class CoreFramework{
      * @param array $slugs Add any Slugs value found in the Request path (order matters)
      * @return bool true if Route was found and callback executed, false otherwise
      */
-    protected function traverseRoutes($method = 'GET',array $routes,array &$slugs){
+    protected function traverseRoutes($method = 'GET', array $routes, array &$slugs){
         if (isset($routes[$method])){
             foreach($routes[$method] as $route)
-                if($func = $this->processUri($route,$slugs)){
+                if($func = $this->processUri($route, $slugs)){
                     //call callback function with params in slugs
-                    call_user_func_array($func,$slugs);
+                    call_user_func_array($func, $slugs);
                     return true;
                 }
         }
@@ -92,19 +91,19 @@ abstract class CoreFramework{
         return isset($uri_segments[$segment_number]) ? $uri_segments[$segment_number] : false;
     }
 
-    private function processUri($route,&$slugs = array()){
+    private function processUri($route, &$slugs = array()){
         $url =$this->request->getRequestedUri();
         $uri = parse_url($url, PHP_URL_PATH);
-        $func = $this->matchUriWithRoute($uri,$route,$slugs);
+        $func = $this->matchUriWithRoute($uri, $route, $slugs);
         return $func ? $func : false;
     }
 
-    static function matchUriWithRoute($uri,$route,&$slugs){
-        $uri_segments = preg_split('/[\/]+/',$uri,null,PREG_SPLIT_NO_EMPTY);
+    static function matchUriWithRoute($uri, $route, &$slugs){
+        $uri_segments = preg_split('/[\/]+/', $uri, null, PREG_SPLIT_NO_EMPTY);
 
-        $route_segments = preg_split('/[\/]+/',$route->route,null,PREG_SPLIT_NO_EMPTY);
+        $route_segments = preg_split('/[\/]+/', $route->route, null, PREG_SPLIT_NO_EMPTY);
 
-        if (CoreFramework::compareSegments($uri_segments,$route_segments,$slugs)){
+        if (CoreFramework::compareSegments($uri_segments, $route_segments, $slugs)){
             //route matched
             return $route->function; //Object route
         }
@@ -116,19 +115,23 @@ abstract class CoreFramework{
      * @param $route_segments
      * @return bool
      */
-    static function CompareSegments($uri_segments,$route_segments,&$slugs){
+    static function CompareSegments($uri_segments, $route_segments, &$slugs){
 
         if (count($uri_segments) != count($route_segments)) return false;
 
         foreach($uri_segments as $segment_index => $segment){
             $segment_route = $route_segments[$segment_index];
             //different segments must be an {slug} | :slug
-            $is_slug = preg_match('/^{[^\/]*}$/',$segment_route) || preg_match('/^:[^\/]*/',$segment_route,$matches);
+            $is_slug = preg_match('/^{[^\/]*}$/', $segment_route) || preg_match('/^:[^\/]*/', $segment_route,$matches);
 
-            if ($is_slug)//Note php does not support named parameters
+            if ($is_slug){//Note php does not support named parameters
+                if (strlen(trim($segment)) === 0){
+                  return false;
+                }
                 $slugs[ str_ireplace(array(':', '{', '}'), '', $segment_route) ] = $segment;//save slug key => value
-            else if($segment_route != $segment && $is_slug != 1) return false;
-
+              }
+            else if($segment_route !== $segment && $is_slug !== 1)
+             return false;
         }
         //match with every segment
         return true;
@@ -194,7 +197,7 @@ class App extends CoreFramework{
      */
     public function get($uri,callable $callback){
         //save route and function
-        $this->routes['GET'][] = new Route($uri,$callback);
+        $this->routes['GET'][] = new Route($uri, $callback);
     }
 
     /**
@@ -203,7 +206,7 @@ class App extends CoreFramework{
      * @param callable $function executable
      */
     public function post($uri,callable $callback){
-        $this->routes['POST'][] = new Route($uri,$callback);
+        $this->routes['POST'][] = new Route($uri, $callback);
     }
 
     /**
@@ -212,7 +215,7 @@ class App extends CoreFramework{
      * @param callable $function executable
      */
     public function put($uri,callable $callback){
-        $this->routes['PUT'][] = new Route($uri,$callback);
+        $this->routes['PUT'][] = new Route($uri, $callback);
     }
 
     /**
@@ -221,7 +224,7 @@ class App extends CoreFramework{
      * @param callable $function executable
      */
     public function delete($uri,callable $callback){
-        $this->routes['DELETE'][] = new Route($uri,$callback);
+        $this->routes['DELETE'][] = new Route($uri, $callback);
     }
 
     /**
@@ -230,7 +233,7 @@ class App extends CoreFramework{
      * @param callable $function executable
      */
     public function respond(callable $callback){
-        $this->routes['respond'] = new Route('',$callback);
+        $this->routes['respond'] = new Route('', $callback);
     }
 
     /**
@@ -239,7 +242,7 @@ class App extends CoreFramework{
     public function listen(){
         $slugs = array();
 
-        $run = $this->traverseRoutes($this->request->getMethod(),$this->routes,$slugs);
+        $run = $this->traverseRoutes($this->request->getMethod(), $this->routes, $slugs);
 
         if(!$run && (!isset($this->routes['respond']) || empty($this->routes['respond']))){
             return $this->error("Route not found for Path: '{$this->request->getRequestedUri()}' with HTTP Method: '{$this->request->getMethod()}'. ", 1 );
@@ -387,8 +390,8 @@ class App extends CoreFramework{
  * @author Julio Cesar Martin
  */
 class Route{
-    public  $route;
-    public  $function;
+    public $route;
+    public $function;
 
     /**
      * @param string $routeKey like /books/{id}/edit
@@ -415,7 +418,7 @@ class Request{
     private $requested_uri;
     private $body = null;
 
-    public function __construct(array $GET = array(),array $POST = array(),array $FILES = array(),array $SERVER = array(),array $COOKIE = array()){
+    public function __construct(array $GET = array(), array $POST = array(), array $FILES = array(), array $SERVER = array(), array $COOKIE = array()){
         $this->get = $GET;
         $this->post = $POST;
         $this->files = $FILES;
@@ -509,10 +512,10 @@ class View
      * Renders a view
      * @throws Exception if View not found
      */
-    public  function load(){
+    public function load(){
         $app = $this->framework;
         $data = $this->data; //deprecated, vars are passed directly since version 0.0.4
-        extract($this->data,EXTR_OVERWRITE);//set global all variables to the view
+        extract($this->data, EXTR_OVERWRITE);//set global all variables to the view
 
         if (file_exists($this->src))
             include_once($this->src); //scoped to this class

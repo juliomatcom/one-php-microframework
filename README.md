@@ -14,7 +14,7 @@ require_once('src/OnePHP/one_framework.php');
 $app = new \OnePHP\App();
 
 $app->get('/:name',function( $name ) use ( $app ){//Action
-        echo $name != '' ? 'Hello world' : "Hello $name";     
+        echo "Hello $name";     
     });     
 $app->listen();
 ```
@@ -23,7 +23,7 @@ $app->listen();
 1- With [**Composer**](https://getcomposer.org/ "download Composer") or download Master [**ZIP**](https://github.com/juliomatcom/one-php-microframework/archive/master.zip "download One PHP Master version"):       
 ```     
 composer create-project julces/oneframework
-``` 
+```
 2- Include the **one_framework.php** in your project and  copy the **.htaccess** file in the **Root Folder** for use the **index.php** as your front controller. See **file structure**  [here](http://oneframework.net/docs/structure.md "File structure")  for more info.  
 3- Run **App->listen()** after add some Actions
 

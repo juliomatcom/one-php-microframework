@@ -20,6 +20,10 @@ class OneFrameworkTest extends PHPUnit_Framework_TestCase
 
         /* Dynamic routes */
         //with :slug
+
+        //Do NOT match
+        $this->tryMatch('/hello/:name','/hello/', array(), false);
+
         $this->tryMatch('/hello/:name','/hello/juliomatcom', array(
             'name' => 'juliomatcom'
         ));
@@ -59,7 +63,7 @@ class OneFrameworkTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/delete', $routes['DELETE'][0]->route );
     }
 
-    private function tryMatch($route, $uri, array $expected_slugs = array() ){
+    private function tryMatch($route, $uri, array $expected_slugs = array(), $expected = true ){
 
         $routeObj = new \OnePHP\Route( $route , function ( $name ) { } );
 
@@ -71,7 +75,7 @@ class OneFrameworkTest extends PHPUnit_Framework_TestCase
         $matched = \OnePHP\CoreFramework::CompareSegments($uri_segments,$route_segments,$slugs);
 
         //function was found
-        $this->assertEquals(true, $matched, "Cant match this route: '$route' with '$uri'\n");
+        $this->assertEquals($expected, $matched, "Cant match this route: '$route' with '$uri'\n");
         //slugs values was properly saved
         $this->assertEquals($expected_slugs, $slugs, 'Final slugs does not match');
     }
