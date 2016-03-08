@@ -2,3 +2,5 @@
 .gitignore
 apigen.phar
 phpunit.phar
+.DS_Store
+src√/.DS_Store
