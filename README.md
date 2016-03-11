@@ -1,5 +1,5 @@
 #One PHP MicroFramework
-An extremely light-weight and small Restful Micro-Framework MVC for Web 2.0 in one file, based on Symfony and ExpressJS. Zero config.   
+An extremely light-weight and small Restful Micro-Framework MVC for Web 2.0 that does'nt get in your way, based on Symfony and ExpressJS. No Config.   
 
 [![Build Status](https://travis-ci.org/juliomatcom/one-php-microframework.svg?branch=master)](https://travis-ci.org/juliomatcom/one-php-microframework)
 [![Latest Stable Version](https://poser.pugx.org/julces/oneframework/v/stable)](https://packagist.org/packages/julces/oneframework)
