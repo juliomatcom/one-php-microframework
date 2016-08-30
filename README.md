@@ -6,6 +6,7 @@ An extremely light-weight and small Restful Micro-Framework MVC for Web 2.0 that
 [![Latest Unstable Version](https://poser.pugx.org/julces/oneframework/v/unstable)](https://packagist.org/packages/julces/oneframework)
 [![License](https://poser.pugx.org/julces/oneframework/license)](https://packagist.org/packages/julces/oneframework)   
 
+### :loudspeaker: *I stop developing new features for OnePHP, if you feel like you have the time you are welcome to [contact me](https://twitter.com/juliomatcom) or [PR](https://github.com/juliomatcom/one-php-microframework/pulls) and keep this cool framework up to date.*
 ---
 ##Simplest usage:
 ```php
