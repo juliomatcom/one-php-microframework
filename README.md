@@ -49,7 +49,7 @@ $app->respond( function() use ( $app ){
     });
 ```
 
-##Read the [Documentation](docs/ "Documentation")
+##Read the [Documentation](docs/contents.md "Documentation")
 
 ###Contribute, is easy!
 Found a **bug**, need **directions**
