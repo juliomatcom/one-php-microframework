@@ -25,7 +25,7 @@ $app->listen();
 ```     
 composer create-project julces/oneframework
 ```
-2- Include the **one_framework.php** in your project and  copy the **.htaccess** file in the **Root Folder** for use the **index.php** as your front controller. See **file structure**  [here](http://oneframework.net/docs/structure.md "File structure")  for more info.  
+2- Include the **one_framework.php** in your project and  copy the **.htaccess** file in the **Root Folder** for use the **index.php** as your front controller. See **file structure**  [here](docs/structure.md)  for more info.  
 3- Run **App->listen()** after add some Actions
 
 ###Why use this tiny Microframework?
@@ -49,7 +49,7 @@ $app->respond( function() use ( $app ){
     });
 ```
 
-##Read the [Documentation](http://oneframework.net/docs/ "See the official documentation in the One Micro Framework website")
+##Read the [Documentation](docs/ "Documentation")
 
 ###Contribute, is easy!
 Found a **bug**, need **directions**
@@ -57,7 +57,5 @@ or just want to say hi ?
 Let me know, **Fork** the project, created an **issue** or **contact** me.
 
 Follow [@juliomatcom](https://twitter.com/juliomatcom    "News and updates") to keep update
-
-[http://oneframework.net/](http://oneframework.net/    "Official website")  
 
 [MIT @juliomatcom](http://licsource.com/mit?name=Julio Cesar Martin&year=2016&email=juliomatcom@gmail.com&url=http://julces.com/)

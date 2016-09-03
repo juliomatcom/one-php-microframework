@@ -34,7 +34,7 @@ $app->respond( function() use ( $app ){
     });
 ```
 
-####Generating new routes with getRoute 
+####Generating new routes with getRoute
 ```php
 <a href="<?php echo $app->generateRoute('/about'); ?>"> About </a>
 
@@ -43,8 +43,7 @@ $app->respond( function() use ( $app ){
 </a>
 ```
 
-###Next: [Controllers ](https://github.com/juliomatcom/one-php-microframework/blob/master/docs/controllers.md "Using your controllers with One Framework")
+###Next: [Controllers ](controllers.md "Using your controllers with One Framework")
 
-#####This documentation is served in [oneframework.net ](http://oneframework.net "More documentation of the One Framework")
 ######Contribute and improve this documentation.
 ######Click Edit and Fork the project.
