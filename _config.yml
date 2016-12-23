@@ -1,1 +1,5 @@
 theme: jekyll-theme-tactile
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
