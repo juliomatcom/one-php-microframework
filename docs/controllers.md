@@ -1,9 +1,9 @@
-##ONE PHP Micro Framework Documentation
-###Controllers:
+## ONE PHP Micro Framework Documentation
+### Controllers:
 
 Include in your index.php (front controller) all your controllers files then just add some Actions.
 
-####Using Restful Actions on Books
+#### Using Restful Actions on Books
 ```php
 // $id_book will be the value passed on the URL
 // file: src/controllers/main.php
@@ -42,8 +42,8 @@ You can read more about restful Actions in:
 [restapitutorial.com ](http://www.restapitutorial.com/lessons/httpmethods.html "restapitutorial.com")
 
 
-###Next: [Views ](views.md "Render views from controllers with One Framework")
+### Next: [Views ](views.md "Render views from controllers with One Framework")
 
 
-######Contribute and improve this documentation.
-######Click Edit and Fork the project.
+###### Contribute and improve this documentation.
+###### Click Edit and Fork the project.
