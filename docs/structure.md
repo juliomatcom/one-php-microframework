@@ -1,4 +1,4 @@
-##ONE PHP Micro Framework Documentation
+## ONE PHP Micro Framework Documentation
 
 This is the directory structure you will end up with following the instructions in the Installation Guide.
 Note: You can use controllers or not, but is always recomended for big projects.
@@ -15,8 +15,8 @@ Note: You can use controllers or not, but is always recomended for big projects.
     |       |--     |-- libs/
     |       |-- public/
 
-####All your code must go inside src/ folder.
-###Next: [Routing ](routing.md "Start with routings")
+#### All your code must go inside src/ folder.
+### Next: [Routing ](routing.md "Start with routings")
 
-######Contribute and improve this documentation.
-######Click Edit and Fork the project.
+###### Contribute and improve this documentation.
+###### Click Edit and Fork the project.
