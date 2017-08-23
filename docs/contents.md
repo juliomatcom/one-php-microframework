@@ -9,7 +9,7 @@ Just 2 simple class to help you develop easy and fast websites and webservices f
 ##### 5- [More](more.md "More documentation of the One Framework")
 
 
-####Simplest example:
+#### Simplest example:
 ```php
     //index.php file
     require_once('src/OnePHP/one_framework.php');
@@ -23,5 +23,5 @@ Just 2 simple class to help you develop easy and fast websites and webservices f
 
 
 
-######Contribute and improve this documentation.
-######Click Edit and Fork the project.
+###### Contribute and improve this documentation.
+###### Click Edit and Fork the project.
