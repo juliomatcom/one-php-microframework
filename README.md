@@ -57,5 +57,3 @@ or just want to say hi ?
 Let me know, **Fork** the project, create an **issue** or **contact** me.   
 
 Follow [@juliomatcom](https://twitter.com/juliomatcom    "News and updates") to keep up to date
-
-[MIT @juliomatcom](http://licsource.com/mit?name=Julio Cesar Martin&year=2016&email=juliomatcom@gmail.com&url=http://julces.com/)
