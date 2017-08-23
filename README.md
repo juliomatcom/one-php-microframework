@@ -42,7 +42,7 @@ composer create-project julces/oneframework
 
 
 
-###Basic Usage 2: Respond to all Requests (if no other match)
+### Basic Usage 2: Respond to all Requests (if no other match)
 ```php
 $app->respond( function() use ( $app ){
   return $app->ResponseHTML('<p> This is a response with code 404. </p>', 404);
