@@ -2,7 +2,7 @@
 
 This is the directory structure you will end up with following the instructions in the Installation Guide.
 Note: You can use controllers or not, but is always recomended for big projects.
-####MVC
+#### MVC
 
     |-- ROOT
     |       |-- .htacess

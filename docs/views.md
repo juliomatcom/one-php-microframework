@@ -1,8 +1,8 @@
-##ONE PHP Micro Framework Documentation
-###Views:
+## ONE PHP Micro Framework Documentation
+### Views:
 
-###To add a view just create .php files in your a new folder project named /views/ then use Response to render it:
-####Rendering a view
+### To add a view just create .php files in your a new folder project named /views/ then use Response to render it:
+#### Rendering a view
 ```php
 // file: /src/controllers/book.php
 // view is located in /src/views/books_list_view.php
@@ -11,7 +11,7 @@ $app->post('/books/',function() use ($app){
      return $app->Response('books_list_view.php', array('books' => $books));
 });
 ```
-####You can serve static files in your views files just locating them in the top of Root folder '/'  like: ( See [Folder structure ](structure.md "Folder structure Normal or MVC") )
+#### You can serve static files in your views files just locating them in the top of Root folder '/'  like: ( See [Folder structure ](structure.md "Folder structure Normal or MVC") )
 
 ```html
 <!-- file: /views/home.php -->
@@ -21,10 +21,10 @@ $app->post('/books/',function() use ($app){
     <!-- Custom CSS -->
     <link href="/public/css/one-page-wonder.css" rel="stylesheet">
 ```
-#####You can change the default directory of view in the constants of de Framework   
+##### You can change the default directory of view in the constants of de Framework   
 The $app var and Vars passed  to Views are globally accesible from any view loaded by Response().
 
-###Next: [More](more.md "More documentation of the One Framework")
+### Next: [More](more.md "More documentation of the One Framework")
 
-######Contribute and improve this documentation.
-######Click Edit and Fork the project.
+###### Contribute and improve this documentation.
+###### Click Edit and Fork the project.
