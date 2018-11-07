@@ -11,7 +11,7 @@ const APP_NAME = ''; //add front controller to URL (change only if you know what
  * OneFramework extends this Class
  * Contribute in:
  * https://github.com/juliomatcom/one-php-microframework
- * Contact: juliomatcom@yandex.com
+ * Contact: juliomatcom@gmail.com
  * @author Julio Cesar Martin
  * @version 0.2.1
 
